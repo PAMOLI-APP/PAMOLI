@@ -6,514 +6,155 @@
 <title>PAMOLI Coaching</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green: #1B4332;
-    --green-mid: #2D6A4F;
-    --green-light: #40916C;
-    --gold: #B8860B;
-    --gold-light: #D4A017;
-    --cream: #FAF7F2;
-    --dark: #0D1F17;
-    --text: #2C2C2C;
-    --muted: #6B7280;
-    --border: #E5E0D8;
-    --white: #FFFFFF;
-    --danger: #C0392B;
-    --success: #27AE60;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    min-height: 100vh;
-  }
-
-  /* NAV */
-  nav {
-    background: var(--dark);
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 2px solid var(--gold);
-  }
-
-  .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: var(--white);
-    letter-spacing: 2px;
-  }
-
-  .logo span { color: var(--gold); }
-
-  .lang-toggle {
-    display: flex;
-    gap: 4px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 20px;
-    padding: 4px;
-  }
-
-  .lang-btn {
-    padding: 4px 12px;
-    border: none;
-    border-radius: 16px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: transparent;
-    color: rgba(255,255,255,0.6);
-  }
-
-  .lang-btn.active {
-    background: var(--gold);
-    color: var(--dark);
-  }
-
-  /* SIDEBAR */
-  .layout {
-    display: flex;
-    min-height: calc(100vh - 64px);
-  }
-
-  sidebar {
-    width: 220px;
-    background: var(--dark);
-    padding: 24px 0;
-    flex-shrink: 0;
-    position: sticky;
-    top: 64px;
-    height: calc(100vh - 64px);
-    overflow-y: auto;
-  }
-
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 24px;
-    cursor: pointer;
-    color: rgba(255,255,255,0.5);
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s;
-    border-left: 3px solid transparent;
-  }
-
-  .nav-item:hover { color: var(--white); background: rgba(255,255,255,0.05); }
-  .nav-item.active { color: var(--gold); border-left-color: var(--gold); background: rgba(184,134,11,0.1); }
-  .nav-item .icon { font-size: 18px; width: 24px; text-align: center; }
-
-  /* MAIN */
-  main {
-    flex: 1;
-    padding: 32px;
-    max-width: 960px;
-  }
-
-  /* PAGE TITLE */
-  .page-header {
-    margin-bottom: 32px;
-  }
-
-  .page-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    color: var(--green);
-    margin-bottom: 4px;
-  }
-
-  .page-sub {
-    color: var(--muted);
-    font-size: 14px;
-  }
-
-  /* CARDS */
-  .card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 24px;
-    border: 1px solid var(--border);
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-
-  .card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--green);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  /* STATS */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-
-  .stat-card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 20px;
-    border: 1px solid var(--border);
-    text-align: center;
-  }
-
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    color: var(--green);
-    font-weight: 700;
-  }
-
-  .stat-label {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 4px;
-    font-weight: 500;
-  }
-
-  /* BUTTONS */
-  .btn {
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .btn-primary {
-    background: var(--green);
-    color: var(--white);
-  }
-
-  .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
-
-  .btn-gold {
-    background: var(--gold);
-    color: var(--white);
-  }
-
-  .btn-gold:hover { background: var(--gold-light); }
-
-  .btn-outline {
-    background: transparent;
-    border: 1.5px solid var(--green);
-    color: var(--green);
-  }
-
-  .btn-outline:hover { background: var(--green); color: var(--white); }
-
-  .btn-sm { padding: 6px 14px; font-size: 12px; }
-  .btn-danger { background: var(--danger); color: white; }
-
-  /* FORM */
-  .form-group { margin-bottom: 16px; }
-
-  label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--green);
-    margin-bottom: 6px;
-  }
-
-  input, select, textarea {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-size: 14px;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text);
-    background: var(--cream);
-    transition: border-color 0.2s;
-    outline: none;
-  }
-
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--green);
-    background: var(--white);
-  }
-
-  textarea { resize: vertical; min-height: 80px; }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-  /* BADGE */
-  .badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-  }
-
-  .badge-green { background: #D1FAE5; color: var(--green); }
-  .badge-gold { background: #FEF3C7; color: var(--gold); }
-  .badge-red { background: #FEE2E2; color: var(--danger); }
-
-  /* CLIENT LIST */
-  .client-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    transition: background 0.1s;
-  }
-
-  .client-row:last-child { border-bottom: none; }
-  .client-row:hover { background: var(--cream); margin: 0 -24px; padding: 14px 24px; border-radius: 10px; }
-
-  .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--green);
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  .client-info { flex: 1; }
-  .client-name { font-weight: 600; font-size: 14px; }
-  .client-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-  /* EXERCISE */
-  .exercise-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .exercise-item:last-child { border-bottom: none; }
-
-  .ex-num {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--green);
-    color: var(--white);
-    font-size: 12px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .ex-info { flex: 1; }
-  .ex-name { font-weight: 600; font-size: 14px; }
-  .ex-detail { font-size: 12px; color: var(--muted); }
-
-  /* FASTING CLOCK */
-  .fasting-card {
-    background: linear-gradient(135deg, var(--dark) 0%, var(--green) 100%);
-    border-radius: 20px;
-    padding: 28px;
-    color: var(--white);
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .fasting-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    color: var(--gold);
-    margin-bottom: 6px;
-  }
-
-  .fasting-clock {
-    font-family: 'Playfair Display', serif;
-    font-size: 52px;
-    font-weight: 900;
-    letter-spacing: 4px;
-    margin: 16px 0;
-  }
-
-  .fasting-bar-bg {
-    background: rgba(255,255,255,0.2);
-    border-radius: 10px;
-    height: 8px;
-    margin: 12px 0;
-    overflow: hidden;
-  }
-
-  .fasting-bar {
-    height: 100%;
-    background: var(--gold);
-    border-radius: 10px;
-    transition: width 0.5s;
-  }
-
-  .fasting-times {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: rgba(255,255,255,0.7);
-    margin-top: 8px;
-  }
-
-  /* TABS */
-  .tabs {
-    display: flex;
-    gap: 4px;
-    background: var(--border);
-    border-radius: 12px;
-    padding: 4px;
-    margin-bottom: 20px;
-    width: fit-content;
-  }
-
-  .tab {
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    color: var(--muted);
-    border: none;
-    background: transparent;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .tab.active { background: var(--white); color: var(--green); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-
-  /* MEAL PLAN */
-  .meal-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .meal-row:last-child { border-bottom: none; }
-
-  .meal-time {
-    width: 70px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--gold);
-    flex-shrink: 0;
-    padding-top: 2px;
-  }
-
-  .meal-content { flex: 1; }
-  .meal-name { font-weight: 600; font-size: 14px; }
-  .meal-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-  /* PAGE VISIBILITY */
-  .page { display: none; }
-  .page.active { display: block; }
-
-  /* MODAL */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .modal-overlay.open { display: flex; }
-
-  .modal {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 28px;
-    width: 100%;
-    max-width: 480px;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-
-  .modal-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: var(--green);
-    margin-bottom: 20px;
-  }
-
-  .modal-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 20px;
-  }
-
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 20px 0;
-  }
-
-  /* DIAMOND DECORATION */
-  .diamond-accent {
-    color: var(--gold);
-    margin-right: 6px;
-  }
-
-  /* NOTIFICATION */
-  .notif {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: var(--green);
-    color: white;
-    padding: 14px 20px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    transform: translateY(80px);
-    opacity: 0;
-    transition: all 0.3s;
-    z-index: 300;
-  }
-
-  .notif.show { transform: translateY(0); opacity: 1; }
-
-  @media (max-width: 768px) {
-    sidebar { width: 60px; }
-    .nav-item span { display: none; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    main { padding: 20px 16px; }
-  }
+:root {
+  --green:#1B4332; --green-mid:#2D6A4F; --gold:#B8860B; --gold-light:#D4A017;
+  --cream:#FAF7F2; --dark:#0D1F17; --text:#2C2C2C; --muted:#6B7280;
+  --border:#E5E0D8; --white:#FFFFFF; --danger:#C0392B; --success:#27AE60;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;}
+nav{background:var(--dark);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--gold);}
+.logo{font-family:'Playfair Display',serif;font-size:22px;color:var(--white);letter-spacing:2px;}
+.lang-toggle{display:flex;gap:4px;background:rgba(255,255,255,0.1);border-radius:20px;padding:4px;}
+.lang-btn{padding:4px 12px;border:none;border-radius:16px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;background:transparent;color:rgba(255,255,255,0.6);}
+.lang-btn.active{background:var(--gold);color:var(--dark);}
+.layout{display:flex;min-height:calc(100vh - 64px);}
+sidebar{width:220px;background:var(--dark);padding:24px 0;flex-shrink:0;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto;}
+.nav-item{display:flex;align-items:center;gap:12px;padding:14px 24px;cursor:pointer;color:rgba(255,255,255,0.5);font-size:14px;font-weight:500;transition:all 0.2s;border-left:3px solid transparent;}
+.nav-item:hover{color:var(--white);background:rgba(255,255,255,0.05);}
+.nav-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(184,134,11,0.1);}
+.nav-item .icon{font-size:18px;width:24px;text-align:center;}
+main{flex:1;padding:32px;max-width:960px;}
+.page-header{margin-bottom:32px;}
+.page-title{font-family:'Playfair Display',serif;font-size:32px;color:var(--green);margin-bottom:4px;}
+.page-sub{color:var(--muted);font-size:14px;}
+.card{background:var(--white);border-radius:16px;padding:24px;border:1px solid var(--border);margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.card-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
+.stat-card{background:var(--white);border-radius:16px;padding:20px;border:1px solid var(--border);text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:36px;color:var(--green);font-weight:700;}
+.stat-label{font-size:12px;color:var(--muted);margin-top:4px;font-weight:500;}
+.btn{padding:10px 20px;border-radius:10px;border:none;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.btn-primary{background:var(--green);color:var(--white);}
+.btn-primary:hover{background:var(--green-mid);transform:translateY(-1px);}
+.btn-gold{background:var(--gold);color:var(--white);}
+.btn-gold:hover{background:var(--gold-light);}
+.btn-outline{background:transparent;border:1.5px solid var(--green);color:var(--green);}
+.btn-outline:hover{background:var(--green);color:var(--white);}
+.btn-sm{padding:6px 14px;font-size:12px;}
+.btn-danger{background:var(--danger);color:white;}
+.form-group{margin-bottom:16px;}
+label{display:block;font-size:13px;font-weight:600;color:var(--green);margin-bottom:6px;}
+input,select,textarea{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--cream);transition:border-color 0.2s;outline:none;}
+input:focus,select:focus,textarea:focus{border-color:var(--green);background:var(--white);}
+textarea{resize:vertical;min-height:80px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.badge-green{background:#D1FAE5;color:var(--green);}
+.badge-gold{background:#FEF3C7;color:var(--gold);}
+.badge-red{background:#FEE2E2;color:var(--danger);}
+.client-row{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s;}
+.client-row:last-child{border-bottom:none;}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--green);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
+.client-info{flex:1;}
+.client-name{font-weight:600;font-size:14px;}
+.client-detail{font-size:12px;color:var(--muted);margin-top:2px;}
+.exercise-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.exercise-item:last-child{border-bottom:none;}
+.ex-num{width:28px;height:28px;border-radius:50%;background:var(--green);color:var(--white);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ex-info{flex:1;}
+.ex-name{font-weight:600;font-size:14px;}
+.ex-detail{font-size:12px;color:var(--muted);}
+.fasting-card{background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);border-radius:20px;padding:28px;color:var(--white);text-align:center;margin-bottom:20px;}
+.fasting-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);margin-bottom:6px;}
+.fasting-clock{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;letter-spacing:4px;margin:16px 0;}
+.fasting-bar-bg{background:rgba(255,255,255,0.2);border-radius:10px;height:8px;margin:12px 0;overflow:hidden;}
+.fasting-bar{height:100%;background:var(--gold);border-radius:10px;transition:width 0.5s;}
+.fasting-times{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.7);margin-top:8px;}
+.meal-row{display:flex;align-items:flex-start;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);}
+.meal-row:last-child{border-bottom:none;}
+.meal-time{width:70px;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;padding-top:2px;}
+.meal-content{flex:1;}
+.meal-name{font-weight:600;font-size:14px;}
+.page{display:none;}
+.page.active{display:block;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:20px;padding:28px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;}
+.modal-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--green);margin-bottom:20px;}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+.notif{position:fixed;bottom:24px;right:24px;background:var(--green);color:white;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,0.2);transform:translateY(80px);opacity:0;transition:all 0.3s;z-index:300;}
+.notif.show{transform:translateY(0);opacity:1;}
+
+/* NUTRITION MACROS */
+.macro-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0;}
+.macro-box{background:var(--cream);border-radius:12px;padding:12px;text-align:center;border:1px solid var(--border);}
+.macro-val{font-family:'Playfair Display',serif;font-size:22px;color:var(--green);font-weight:700;}
+.macro-label{font-size:11px;color:var(--muted);margin-top:4px;}
+
+/* METABOLISM */
+.meta-result{background:linear-gradient(135deg,var(--dark),var(--green));border-radius:20px;padding:24px;color:var(--white);margin-bottom:20px;}
+.meta-main{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:var(--gold);text-align:center;}
+.meta-label{text-align:center;font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:16px;}
+.meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.meta-item{background:rgba(255,255,255,0.1);border-radius:12px;padding:12px;text-align:center;}
+.meta-item-val{font-size:20px;font-weight:700;color:var(--gold);}
+.meta-item-label{font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;}
+
+/* FOOD SEARCH */
+.food-search-wrap{position:relative;margin-bottom:16px;}
+.food-results{position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--border);border-radius:12px;max-height:200px;overflow-y:auto;z-index:50;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+.food-result-item{padding:10px 14px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--border);transition:background 0.1s;}
+.food-result-item:hover{background:var(--cream);}
+.food-result-item:last-child{border-bottom:none;}
+.food-detail{font-size:11px;color:var(--muted);margin-top:2px;}
+.ingredient-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+
+/* RECIPES */
+.recipe-card{background:var(--white);border-radius:16px;padding:20px;border:1px solid var(--border);margin-bottom:16px;}
+.recipe-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--green);margin-bottom:8px;}
+.recipe-macros{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;}
+
+/* NOTES */
+.note-item{background:var(--cream);border-radius:12px;padding:14px;margin-bottom:10px;border-left:3px solid var(--gold);}
+.note-date{font-size:11px;color:var(--muted);margin-bottom:6px;}
+
+/* WEIGHT */
+.weight-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.weight-row:last-child{border-bottom:none;}
+.weight-date{font-size:12px;color:var(--muted);width:100px;flex-shrink:0;}
+.weight-val{font-weight:700;color:var(--green);font-size:16px;}
+.weight-diff{font-size:12px;font-weight:600;margin-left:auto;}
+.w-down{color:var(--success);}
+.w-up{color:var(--danger);}
+
+/* MINDSET */
+.quote-card{background:linear-gradient(135deg,var(--dark),var(--green));border-radius:20px;padding:28px;color:var(--white);text-align:center;margin-bottom:16px;}
+.quote-text{font-family:'Playfair Display',serif;font-size:20px;line-height:1.6;color:var(--gold);margin-bottom:12px;}
+.quote-author{font-size:13px;color:rgba(255,255,255,0.6);}
+
+/* VIDEOS */
+.video-item{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);}
+.video-item:last-child{border-bottom:none;}
+.video-play{width:60px;height:40px;background:var(--dark);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.video-info{flex:1;}
+.video-title{font-weight:600;font-size:14px;}
+.video-cat{font-size:11px;color:var(--gold);font-weight:600;margin-top:2px;}
+
+@media(max-width:768px){
+  sidebar{width:60px;}
+  .nav-item span{display:none;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .form-row,.form-row-3{grid-template-columns:1fr;}
+  .macro-grid{grid-template-columns:1fr 1fr;}
+  .meta-grid{grid-template-columns:1fr 1fr;}
+  main{padding:20px 16px;}
+}
 </style>
 </head>
 <body>
-
 <nav>
   <div class="logo">PAMOLI</div>
   <div class="lang-toggle">
@@ -523,201 +164,263 @@
 </nav>
 
 <div class="layout">
-  <sidebar>
-    <div class="nav-item active" onclick="showPage('dashboard')">
-      <span class="icon">🏠</span>
-      <span data-fr="Accueil" data-en="Home">Accueil</span>
-    </div>
-    <div class="nav-item" onclick="showPage('clients')">
-      <span class="icon">👩🏾</span>
-      <span data-fr="Clientes" data-en="Clients">Clientes</span>
-    </div>
-    <div class="nav-item" onclick="showPage('programs')">
-      <span class="icon">📋</span>
-      <span data-fr="Programmes" data-en="Programs">Programmes</span>
-    </div>
-    <div class="nav-item" onclick="showPage('nutrition')">
-      <span class="icon">🥗</span>
-      <span data-fr="Nutrition" data-en="Nutrition">Nutrition</span>
-    </div>
-    <div class="nav-item" onclick="showPage('fasting')">
-      <span class="icon">⏱️</span>
-      <span data-fr="Jeûne" data-en="Fasting">Jeûne</span>
-    </div>
-  </sidebar>
+<sidebar>
+  <div class="nav-item active" onclick="showPage('dashboard',this)"><span class="icon">🏠</span><span data-fr="Accueil" data-en="Home">Accueil</span></div>
+  <div class="nav-item" onclick="showPage('clients',this)"><span class="icon">👩🏾</span><span data-fr="Clientes" data-en="Clients">Clientes</span></div>
+  <div class="nav-item" onclick="showPage('programs',this)"><span class="icon">📋</span><span data-fr="Programmes" data-en="Programs">Programmes</span></div>
+  <div class="nav-item" onclick="showPage('metabolism',this)"><span class="icon">🔥</span><span data-fr="Métabolisme" data-en="Metabolism">Métabolisme</span></div>
+  <div class="nav-item" onclick="showPage('nutrition',this)"><span class="icon">🥗</span><span data-fr="Nutrition" data-en="Nutrition">Nutrition</span></div>
+  <div class="nav-item" onclick="showPage('recipes',this)"><span class="icon">👩‍🍳</span><span data-fr="Recettes" data-en="Recipes">Recettes</span></div>
+  <div class="nav-item" onclick="showPage('fasting',this)"><span class="icon">⏱️</span><span data-fr="Jeûne" data-en="Fasting">Jeûne</span></div>
+  <div class="nav-item" onclick="showPage('weight',this)"><span class="icon">⚖️</span><span data-fr="Poids" data-en="Weight">Poids</span></div>
+  <div class="nav-item" onclick="showPage('mindset',this)"><span class="icon">🧠</span><span data-fr="Mindset" data-en="Mindset">Mindset</span></div>
+  <div class="nav-item" onclick="showPage('videos',this)"><span class="icon">▶️</span><span data-fr="Vidéos" data-en="Videos">Vidéos</span></div>
+  <div class="nav-item" onclick="showPage('notes',this)"><span class="icon">📝</span><span data-fr="Notes" data-en="Notes">Notes</span></div>
+</sidebar>
 
-  <main>
+<main>
+  <!-- DASHBOARD -->
+  <div id="page-dashboard" class="page active">
+    <div class="page-header">
+      <div class="page-title">💎 <span data-fr="Bonjour, Mirtha" data-en="Hello, Mirtha">Bonjour, Mirtha</span></div>
+      <div class="page-sub">Pa Moli — Never Give Up 🇬🇫</div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num" id="stat-clients">0</div><div class="stat-label" data-fr="Clientes" data-en="Clients">Clientes</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-programs">0</div><div class="stat-label" data-fr="Programmes" data-en="Programs">Programmes</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-recipes">0</div><div class="stat-label" data-fr="Recettes" data-en="Recipes">Recettes</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">👩🏾 <span data-fr="Clientes récentes" data-en="Recent clients">Clientes récentes</span></div>
+      <div id="dashboard-clients-list"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px" data-fr="Aucune cliente" data-en="No clients yet">Aucune cliente</div></div>
+    </div>
+  </div>
 
-    <!-- DASHBOARD -->
-    <div id="page-dashboard" class="page active">
-      <div class="page-header">
-        <div class="page-title">💎 <span data-fr="Bonjour, Mirtha" data-en="Hello, Mirtha">Bonjour, Mirtha</span></div>
-        <div class="page-sub" data-fr="Pa Moli — Never Give Up 🇬🇫" data-en="Pa Moli — Never Give Up 🇬🇫">Pa Moli — Never Give Up 🇬🇫</div>
+  <!-- CLIENTS -->
+  <div id="page-clients" class="page">
+    <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="page-title" data-fr="Mes Clientes" data-en="My Clients">Mes Clientes</div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-add-client')" data-fr="+ Ajouter" data-en="+ Add">+ Ajouter</button>
+    </div>
+    <div class="card"><div id="clients-list"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px" data-fr="Aucune cliente" data-en="No clients">Aucune cliente</div></div></div>
+  </div>
+
+  <!-- PROGRAMS -->
+  <div id="page-programs" class="page">
+    <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="page-title" data-fr="Programmes" data-en="Programs">Programmes</div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-add-program')" data-fr="+ Créer" data-en="+ Create">+ Créer</button>
+    </div>
+    <div id="programs-list"></div>
+  </div>
+
+  <!-- METABOLISM -->
+  <div id="page-metabolism" class="page">
+    <div class="page-header">
+      <div class="page-title" data-fr="Calculateur Métabolisme" data-en="Metabolism Calculator">Calculateur Métabolisme</div>
+      <div class="page-sub" data-fr="Formule Mifflin-St Jeor — La plus précise" data-en="Mifflin-St Jeor Formula — Most accurate">Formule Mifflin-St Jeor</div>
+    </div>
+    <div class="card">
+      <div class="card-title">👩🏾 <span data-fr="Informations cliente" data-en="Client info">Informations cliente</span></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-fr="Sélectionner une cliente" data-en="Select a client">Sélectionner une cliente</label>
+          <select id="meta-client" onchange="prefillMeta()"></select>
+        </div>
+        <div class="form-group">
+          <label data-fr="Âge (ans)" data-en="Age (years)">Âge (ans)</label>
+          <input type="number" id="meta-age" placeholder="28">
+        </div>
       </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-num" id="stat-clients">0</div>
-          <div class="stat-label" data-fr="Clientes actives" data-en="Active clients">Clientes actives</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-fr="Poids (kg)" data-en="Weight (kg)">Poids (kg)</label>
+          <input type="number" id="meta-weight" placeholder="70">
         </div>
-        <div class="stat-card">
-          <div class="stat-num" id="stat-programs">0</div>
-          <div class="stat-label" data-fr="Programmes créés" data-en="Programs created">Programmes créés</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num" id="stat-meals">0</div>
-          <div class="stat-label" data-fr="Plans alimentaires" data-en="Meal plans">Plans alimentaires</div>
+        <div class="form-group">
+          <label data-fr="Taille (cm)" data-en="Height (cm)">Taille (cm)</label>
+          <input type="number" id="meta-height" placeholder="165">
         </div>
       </div>
-
+      <div class="form-row">
+        <div class="form-group">
+          <label data-fr="Niveau d'activité" data-en="Activity level">Niveau d'activité</label>
+          <select id="meta-activity">
+            <option value="1.2" data-fr="Sédentaire (peu/pas de sport)" data-en="Sedentary">Sédentaire</option>
+            <option value="1.375" data-fr="Légèrement actif (1-3x/sem)" data-en="Lightly active">Légèrement actif</option>
+            <option value="1.55" data-fr="Modérément actif (3-5x/sem)" data-en="Moderately active">Modérément actif</option>
+            <option value="1.725" data-fr="Très actif (6-7x/sem)" data-en="Very active">Très actif</option>
+            <option value="1.9" data-fr="Extrêmement actif" data-en="Extremely active">Extrêmement actif</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-fr="Objectif" data-en="Goal">Objectif</label>
+          <select id="meta-goal">
+            <option value="loss" data-fr="Perte de poids" data-en="Weight loss">Perte de poids</option>
+            <option value="maintain" data-fr="Maintien" data-en="Maintain">Maintien</option>
+            <option value="gain" data-fr="Prise de masse" data-en="Muscle gain">Prise de masse</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" id="deficit-group">
+        <label data-fr="Déficit/Surplus calorique personnalisé (kcal)" data-en="Custom caloric deficit/surplus (kcal)">Déficit personnalisé (kcal)</label>
+        <input type="number" id="meta-deficit" placeholder="Ex: -500 pour déficit, +300 pour surplus" value="-500">
+      </div>
+      <button class="btn btn-primary" onclick="calcMeta()" style="width:100%" data-fr="Calculer" data-en="Calculate">Calculer</button>
+    </div>
+    <div id="meta-result" style="display:none">
+      <div class="meta-result">
+        <div class="meta-label" data-fr="Métabolisme de base (BMR)" data-en="Basal Metabolic Rate (BMR)">Métabolisme de base (BMR)</div>
+        <div class="meta-main" id="meta-bmr-val">—</div>
+        <div class="meta-label" style="margin-top:4px">kcal/jour</div>
+        <div class="meta-grid" style="margin-top:16px">
+          <div class="meta-item"><div class="meta-item-val" id="meta-tdee-val">—</div><div class="meta-item-label" data-fr="TDEE (dépense totale)" data-en="TDEE (total expenditure)">TDEE</div></div>
+          <div class="meta-item"><div class="meta-item-val" id="meta-target-val">—</div><div class="meta-item-label" data-fr="Objectif calorique" data-en="Caloric target">Objectif</div></div>
+          <div class="meta-item"><div class="meta-item-val" id="meta-protein-val">—</div><div class="meta-item-label" data-fr="Protéines (g)" data-en="Protein (g)">Protéines (g)</div></div>
+          <div class="meta-item"><div class="meta-item-val" id="meta-carbs-val">—</div><div class="meta-item-label" data-fr="Glucides (g)" data-en="Carbs (g)">Glucides (g)</div></div>
+        </div>
+      </div>
       <div class="card">
-        <div class="card-title">👩🏾 <span data-fr="Clientes récentes" data-en="Recent clients">Clientes récentes</span></div>
-        <div id="dashboard-clients-list">
-          <div style="color:var(--muted);font-size:14px;text-align:center;padding:20px" data-fr="Aucune cliente pour le moment" data-en="No clients yet">Aucune cliente pour le moment</div>
+        <div class="card-title">📊 <span data-fr="Répartition des macros" data-en="Macro breakdown">Répartition des macros</span></div>
+        <div class="macro-grid">
+          <div class="macro-box"><div class="macro-val" id="r-protein">—</div><div class="macro-label">Protéines</div></div>
+          <div class="macro-box"><div class="macro-val" id="r-carbs">—</div><div class="macro-label">Glucides</div></div>
+          <div class="macro-box"><div class="macro-val" id="r-fat">—</div><div class="macro-label">Lipides</div></div>
+          <div class="macro-box"><div class="macro-val" id="r-fiber">—</div><div class="macro-label">Fibres</div></div>
         </div>
+        <div id="meta-advice" style="background:var(--cream);border-radius:12px;padding:16px;font-size:14px;line-height:1.7;margin-top:8px"></div>
       </div>
     </div>
+  </div>
 
-    <!-- CLIENTS -->
-    <div id="page-clients" class="page">
-      <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
-        <div>
-          <div class="page-title" data-fr="Mes Clientes" data-en="My Clients">Mes Clientes</div>
-          <div class="page-sub" data-fr="Gérez vos clientes et leur suivi" data-en="Manage your clients and their progress">Gérez vos clientes et leur suivi</div>
-        </div>
-        <button class="btn btn-primary" onclick="openModal('modal-add-client')" data-fr="+ Ajouter" data-en="+ Add">+ Ajouter</button>
+  <!-- NUTRITION -->
+  <div id="page-nutrition" class="page">
+    <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="page-title" data-fr="Plans Alimentaires" data-en="Meal Plans">Plans Alimentaires</div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-add-meal')" data-fr="+ Créer" data-en="+ Create">+ Créer</button>
+    </div>
+    <div id="meals-list"></div>
+  </div>
+
+  <!-- RECIPES -->
+  <div id="page-recipes" class="page">
+    <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="page-title" data-fr="Recettes" data-en="Recipes">Recettes</div><div class="page-sub" data-fr="Calories et macros calculées automatiquement" data-en="Calories and macros auto-calculated">Calories et macros calculées automatiquement</div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-add-recipe')" data-fr="+ Créer" data-en="+ Create">+ Créer</button>
+    </div>
+    <div id="recipes-list"></div>
+  </div>
+
+  <!-- FASTING -->
+  <div id="page-fasting" class="page">
+    <div class="page-header"><div class="page-title" data-fr="Jeûne Intermittent" data-en="Intermittent Fasting">Jeûne Intermittent</div></div>
+    <div class="fasting-card">
+      <div class="fasting-title" data-fr="Minuterie" data-en="Timer">Minuterie</div>
+      <div class="fasting-clock" id="fasting-clock">00:00:00</div>
+      <div class="fasting-bar-bg"><div class="fasting-bar" id="fasting-bar" style="width:0%"></div></div>
+      <div class="fasting-times">
+        <span data-fr="Début" data-en="Start">Début</span>
+        <span id="fasting-progress-text">0%</span>
+        <span data-fr="Fin" data-en="End">Fin</span>
       </div>
-
-      <div class="card">
-        <div id="clients-list">
-          <div style="color:var(--muted);font-size:14px;text-align:center;padding:20px" data-fr="Aucune cliente ajoutée" data-en="No clients added yet">Aucune cliente ajoutée</div>
-        </div>
+      <div style="margin-top:16px;display:flex;gap:12px;justify-content:center">
+        <button class="btn btn-gold" onclick="startFasting()" data-fr="Démarrer" data-en="Start">Démarrer</button>
+        <button class="btn btn-outline" style="color:white;border-color:white" onclick="stopFasting()" data-fr="Arrêter" data-en="Stop">Arrêter</button>
       </div>
     </div>
-
-    <!-- PROGRAMS -->
-    <div id="page-programs" class="page">
-      <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
-        <div>
-          <div class="page-title" data-fr="Programmes" data-en="Programs">Programmes</div>
-          <div class="page-sub" data-fr="Créez et gérez les programmes d'entraînement" data-en="Create and manage training programs">Créez et gérez les programmes d'entraînement</div>
+    <div class="card">
+      <div class="card-title">⚙️ Configuration</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Protocole</label>
+          <select id="fasting-protocol" onchange="updateFastingProtocol()">
+            <option value="16:8">16:8</option><option value="18:6">18:6</option>
+            <option value="20:4">20:4</option><option value="14:10">14:10</option>
+          </select>
         </div>
-        <button class="btn btn-primary" onclick="openModal('modal-add-program')" data-fr="+ Créer" data-en="+ Create">+ Créer</button>
+        <div class="form-group">
+          <label data-fr="Début du jeûne" data-en="Fast start">Début du jeûne</label>
+          <input type="time" id="fasting-start-time" value="20:00" onchange="updateFastingDisplay()">
+        </div>
       </div>
-
-      <div id="programs-list"></div>
+      <div id="fasting-schedule-display" style="background:var(--cream);border-radius:12px;padding:16px;font-size:14px;line-height:2"></div>
     </div>
+  </div>
 
-    <!-- NUTRITION -->
-    <div id="page-nutrition" class="page">
-      <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
-        <div>
-          <div class="page-title" data-fr="Plans Alimentaires" data-en="Meal Plans">Plans Alimentaires</div>
-          <div class="page-sub" data-fr="Créez des plans nutritionnels personnalisés" data-en="Create personalized nutrition plans">Créez des plans nutritionnels personnalisés</div>
-        </div>
-        <button class="btn btn-primary" onclick="openModal('modal-add-meal')" data-fr="+ Créer" data-en="+ Create">+ Créer</button>
-      </div>
-
-      <div id="meals-list"></div>
+  <!-- WEIGHT -->
+  <div id="page-weight" class="page">
+    <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="page-title" data-fr="Suivi du Poids" data-en="Weight Tracking">Suivi du Poids</div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-add-weight')" data-fr="+ Ajouter" data-en="+ Add">+ Ajouter</button>
     </div>
-
-    <!-- FASTING -->
-    <div id="page-fasting" class="page">
-      <div class="page-header">
-        <div class="page-title" data-fr="Jeûne Intermittent" data-en="Intermittent Fasting">Jeûne Intermittent</div>
-        <div class="page-sub" data-fr="Configurez les horaires de jeûne par cliente" data-en="Set fasting schedules per client">Configurez les horaires de jeûne par cliente</div>
-      </div>
-
-      <div class="fasting-card">
-        <div class="fasting-title" data-fr="Minuterie de jeûne" data-en="Fasting Timer">Minuterie de jeûne</div>
-        <div class="fasting-clock" id="fasting-clock">00:00:00</div>
-        <div class="fasting-bar-bg">
-          <div class="fasting-bar" id="fasting-bar" style="width:0%"></div>
-        </div>
-        <div class="fasting-times">
-          <span data-fr="Début jeûne" data-en="Fast start">Début jeûne</span>
-          <span id="fasting-progress-text">0%</span>
-          <span data-fr="Fin jeûne" data-en="Fast end">Fin jeûne</span>
-        </div>
-        <div style="margin-top:16px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-          <button class="btn btn-gold" onclick="startFasting()" id="btn-start-fast" data-fr="Démarrer" data-en="Start">Démarrer</button>
-          <button class="btn btn-outline" style="color:white;border-color:white" onclick="stopFasting()" data-fr="Arrêter" data-en="Stop">Arrêter</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">⚙️ <span data-fr="Configuration du jeûne" data-en="Fasting Configuration">Configuration du jeûne</span></div>
-        <div class="form-row">
-          <div class="form-group">
-            <label data-fr="Protocole" data-en="Protocol">Protocole</label>
-            <select id="fasting-protocol" onchange="updateFastingProtocol()">
-              <option value="16:8">16:8 (16h jeûne / 8h repas)</option>
-              <option value="18:6">18:6 (18h jeûne / 6h repas)</option>
-              <option value="20:4">20:4 (20h jeûne / 4h repas)</option>
-              <option value="14:10">14:10 (14h jeûne / 10h repas)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label data-fr="Heure de début du jeûne" data-en="Fast start time">Heure de début du jeûne</label>
-            <input type="time" id="fasting-start-time" value="20:00" onchange="updateFastingDisplay()">
-          </div>
-        </div>
-        <div id="fasting-schedule-display" style="background:var(--cream);border-radius:12px;padding:16px;font-size:14px;line-height:2"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">📋 <span data-fr="Plages de repas" data-en="Meal Windows">Plages de repas</span></div>
-        <div id="meal-window-display"></div>
-      </div>
+    <div class="card">
+      <div class="card-title">👩🏾 <span data-fr="Cliente" data-en="Client">Cliente</span></div>
+      <select id="weight-client-filter" onchange="renderWeights()" style="margin-bottom:16px"></select>
+      <div id="weights-list"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px" data-fr="Aucune donnée" data-en="No data">Aucune donnée</div></div>
     </div>
+  </div>
 
-  </main>
+  <!-- MINDSET -->
+  <div id="page-mindset" class="page">
+    <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="page-title">Mindset</div><div class="page-sub" data-fr="Citations et motivation" data-en="Quotes and motivation">Citations et motivation</div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-add-quote')" data-fr="+ Citation" data-en="+ Quote">+ Citation</button>
+    </div>
+    <div id="quotes-list">
+      <div class="quote-card"><div class="quote-text">"Le succès n'est pas final, l'échec n'est pas fatal. C'est le courage de continuer qui compte."</div><div class="quote-author">— Winston Churchill</div></div>
+      <div class="quote-card"><div class="quote-text">"Train your mind. Transform your body."</div><div class="quote-author">— PAMOLI 💎</div></div>
+    </div>
+  </div>
+
+  <!-- VIDEOS -->
+  <div id="page-videos" class="page">
+    <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="page-title" data-fr="Vidéos" data-en="Videos">Vidéos</div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-add-video')" data-fr="+ Ajouter" data-en="+ Add">+ Ajouter</button>
+    </div>
+    <div class="card"><div id="videos-list"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px" data-fr="Aucune vidéo" data-en="No videos">Aucune vidéo</div></div></div>
+  </div>
+
+  <!-- NOTES -->
+  <div id="page-notes" class="page">
+    <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="page-title" data-fr="Notes" data-en="Notes">Notes</div></div>
+      <button class="btn btn-primary" onclick="openModal('modal-add-note')" data-fr="+ Note" data-en="+ Note">+ Note</button>
+    </div>
+    <div class="card">
+      <select id="notes-client-filter" onchange="renderNotes()" style="margin-bottom:16px"></select>
+      <div id="notes-list"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px" data-fr="Aucune note" data-en="No notes">Aucune note</div></div>
+    </div>
+  </div>
+</main>
 </div>
 
-<!-- MODAL: Add Client -->
+<!-- MODALS -->
+<!-- Add Client -->
 <div class="modal-overlay" id="modal-add-client">
   <div class="modal">
     <div class="modal-title">👩🏾 <span data-fr="Nouvelle cliente" data-en="New Client">Nouvelle cliente</span></div>
     <div class="form-row">
-      <div class="form-group">
-        <label data-fr="Prénom" data-en="First name">Prénom</label>
-        <input type="text" id="client-name" placeholder="Ex: Sarah">
-      </div>
-      <div class="form-group">
-        <label data-fr="Âge" data-en="Age">Âge</label>
-        <input type="number" id="client-age" placeholder="28">
-      </div>
+      <div class="form-group"><label>Prénom</label><input type="text" id="c-name" placeholder="Sarah"></div>
+      <div class="form-group"><label data-fr="Âge" data-en="Age">Âge</label><input type="number" id="c-age" placeholder="28"></div>
     </div>
     <div class="form-row">
+      <div class="form-group"><label data-fr="Poids (kg)" data-en="Weight (kg)">Poids (kg)</label><input type="number" id="c-weight" placeholder="70"></div>
+      <div class="form-group"><label data-fr="Taille (cm)" data-en="Height (cm)">Taille (cm)</label><input type="number" id="c-height" placeholder="165"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label data-fr="Objectif (kg)" data-en="Goal (kg)">Objectif (kg)</label><input type="number" id="c-goal" placeholder="60"></div>
       <div class="form-group">
-        <label data-fr="Poids actuel (kg)" data-en="Current weight (kg)">Poids actuel (kg)</label>
-        <input type="number" id="client-weight" placeholder="70">
+        <label>Format</label>
+        <select id="c-format">
+          <option value="online">En ligne</option>
+          <option value="salle">En salle</option>
+          <option value="hybride">Hybride</option>
+        </select>
       </div>
-      <div class="form-group">
-        <label data-fr="Objectif (kg)" data-en="Goal (kg)">Objectif (kg)</label>
-        <input type="number" id="client-goal-weight" placeholder="60">
-      </div>
     </div>
-    <div class="form-group">
-      <label data-fr="Format coaching" data-en="Coaching format">Format coaching</label>
-      <select id="client-format">
-        <option value="online" data-fr="En ligne" data-en="Online">En ligne</option>
-        <option value="salle" data-fr="En salle" data-en="In-person">En salle</option>
-        <option value="hybride" data-fr="Hybride" data-en="Hybrid">Hybride</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label data-fr="Séances par semaine" data-en="Sessions per week">Séances par semaine</label>
-      <select id="client-sessions">
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label data-fr="Notes" data-en="Notes">Notes</label>
-      <textarea id="client-notes" placeholder="Allergies, blessures, objectifs..."></textarea>
-    </div>
+    <div class="form-group"><label data-fr="Séances/semaine" data-en="Sessions/week">Séances/semaine</label><select id="c-sessions"><option>2</option><option>3</option><option>4</option></select></div>
+    <div class="form-group"><label>Notes</label><textarea id="c-notes" placeholder="Allergies, blessures..."></textarea></div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('modal-add-client')" data-fr="Annuler" data-en="Cancel">Annuler</button>
       <button class="btn btn-primary" onclick="addClient()" data-fr="Ajouter" data-en="Add">Ajouter</button>
@@ -725,33 +428,19 @@
   </div>
 </div>
 
-<!-- MODAL: Add Program -->
+<!-- Add Program -->
 <div class="modal-overlay" id="modal-add-program">
   <div class="modal">
     <div class="modal-title">📋 <span data-fr="Nouveau programme" data-en="New Program">Nouveau programme</span></div>
-    <div class="form-group">
-      <label data-fr="Nom du programme" data-en="Program name">Nom du programme</label>
-      <input type="text" id="prog-name" placeholder="Ex: Semaine 1 - Full Body">
-    </div>
+    <div class="form-group"><label data-fr="Nom" data-en="Name">Nom</label><input type="text" id="prog-name" placeholder="Semaine 1 - Full Body"></div>
     <div class="form-row">
-      <div class="form-group">
-        <label data-fr="Cliente" data-en="Client">Cliente</label>
-        <select id="prog-client"></select>
-      </div>
-      <div class="form-group">
-        <label data-fr="Type" data-en="Type">Type</label>
-        <select id="prog-type">
-          <option data-fr="Full Body" data-en="Full Body">Full Body</option>
-          <option data-fr="Haut du corps" data-en="Upper Body">Haut du corps</option>
-          <option data-fr="Bas du corps" data-en="Lower Body">Bas du corps</option>
-          <option data-fr="Cardio" data-en="Cardio">Cardio</option>
-        </select>
-      </div>
+      <div class="form-group"><label>Cliente</label><select id="prog-client"></select></div>
+      <div class="form-group"><label>Type</label><select id="prog-type"><option>Full Body</option><option>Haut du corps</option><option>Bas du corps</option><option>Cardio</option></select></div>
     </div>
     <div class="divider"></div>
-    <div class="card-title" style="margin-bottom:12px">💪 <span data-fr="Exercices" data-en="Exercises">Exercices</span></div>
+    <div style="font-weight:700;color:var(--green);margin-bottom:12px">💪 Exercices</div>
     <div id="exercises-container"></div>
-    <button class="btn btn-outline btn-sm" onclick="addExerciseField()" style="margin-top:8px" data-fr="+ Ajouter exercice" data-en="+ Add exercise">+ Ajouter exercice</button>
+    <button class="btn btn-outline btn-sm" onclick="addExerciseField()" style="margin-top:8px" data-fr="+ Exercice" data-en="+ Exercise">+ Exercice</button>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('modal-add-program')" data-fr="Annuler" data-en="Cancel">Annuler</button>
       <button class="btn btn-primary" onclick="addProgram()" data-fr="Sauvegarder" data-en="Save">Sauvegarder</button>
@@ -759,28 +448,19 @@
   </div>
 </div>
 
-<!-- MODAL: Add Meal Plan -->
+<!-- Add Meal Plan -->
 <div class="modal-overlay" id="modal-add-meal">
   <div class="modal">
-    <div class="modal-title">🥗 <span data-fr="Nouveau plan alimentaire" data-en="New Meal Plan">Nouveau plan alimentaire</span></div>
-    <div class="form-group">
-      <label data-fr="Nom du plan" data-en="Plan name">Nom du plan</label>
-      <input type="text" id="meal-plan-name" placeholder="Ex: Plan semaine 1">
-    </div>
+    <div class="modal-title">🥗 <span data-fr="Nouveau plan" data-en="New plan">Nouveau plan</span></div>
+    <div class="form-group"><label data-fr="Nom du plan" data-en="Plan name">Nom du plan</label><input type="text" id="meal-plan-name" placeholder="Plan semaine 1"></div>
     <div class="form-row">
-      <div class="form-group">
-        <label data-fr="Cliente" data-en="Client">Cliente</label>
-        <select id="meal-client"></select>
-      </div>
-      <div class="form-group">
-        <label data-fr="Calories/jour" data-en="Calories/day">Calories/jour</label>
-        <input type="number" id="meal-calories" placeholder="1800">
-      </div>
+      <div class="form-group"><label>Cliente</label><select id="meal-client"></select></div>
+      <div class="form-group"><label data-fr="Calories cible" data-en="Target calories">Calories cible</label><input type="number" id="meal-calories" placeholder="1800"></div>
     </div>
     <div class="divider"></div>
-    <div class="card-title" style="margin-bottom:12px">🍽️ <span data-fr="Repas" data-en="Meals">Repas</span></div>
+    <div style="font-weight:700;color:var(--green);margin-bottom:12px">🍽️ Repas</div>
     <div id="meals-container"></div>
-    <button class="btn btn-outline btn-sm" onclick="addMealField()" style="margin-top:8px" data-fr="+ Ajouter repas" data-en="+ Add meal">+ Ajouter repas</button>
+    <button class="btn btn-outline btn-sm" onclick="addMealField()" style="margin-top:8px" data-fr="+ Repas" data-en="+ Meal">+ Repas</button>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('modal-add-meal')" data-fr="Annuler" data-en="Cancel">Annuler</button>
       <button class="btn btn-primary" onclick="addMealPlan()" data-fr="Sauvegarder" data-en="Save">Sauvegarder</button>
@@ -788,390 +468,693 @@
   </div>
 </div>
 
-<!-- NOTIFICATION -->
+<!-- Add Recipe -->
+<div class="modal-overlay" id="modal-add-recipe">
+  <div class="modal">
+    <div class="modal-title">👩‍🍳 <span data-fr="Nouvelle recette" data-en="New Recipe">Nouvelle recette</span></div>
+    <div class="form-group"><label data-fr="Nom de la recette" data-en="Recipe name">Nom de la recette</label><input type="text" id="recipe-name" placeholder="Bowl protéiné au poulet"></div>
+    <div class="form-row">
+      <div class="form-group"><label data-fr="Catégorie" data-en="Category">Catégorie</label>
+        <select id="recipe-cat">
+          <option data-fr="Petit-déjeuner" data-en="Breakfast">Petit-déjeuner</option>
+          <option data-fr="Déjeuner" data-en="Lunch">Déjeuner</option>
+          <option data-fr="Dîner" data-en="Dinner">Dîner</option>
+          <option data-fr="Collation" data-en="Snack">Collation</option>
+        </select>
+      </div>
+      <div class="form-group"><label data-fr="Portions" data-en="Servings">Portions</label><input type="number" id="recipe-servings" placeholder="2" value="1"></div>
+    </div>
+    <div class="divider"></div>
+    <div style="font-weight:700;color:var(--green);margin-bottom:12px">🥦 <span data-fr="Ingrédients" data-en="Ingredients">Ingrédients</span></div>
+    <div class="food-search-wrap">
+      <input type="text" id="food-search" placeholder="Rechercher un aliment... (ex: poulet, riz, banane)" oninput="searchFood()">
+      <div class="food-results" id="food-results" style="display:none"></div>
+    </div>
+    <div id="recipe-ingredients"></div>
+    <div class="divider"></div>
+    <div style="font-weight:700;color:var(--green);margin-bottom:12px">📝 <span data-fr="Préparation" data-en="Instructions">Préparation</span></div>
+    <textarea id="recipe-instructions" placeholder="1. Cuire le poulet...\n2. Mélanger..."></textarea>
+    <div id="recipe-macro-preview" style="display:none;margin-top:16px">
+      <div style="font-weight:700;color:var(--green);margin-bottom:8px">📊 Valeurs nutritionnelles (total)</div>
+      <div class="macro-grid">
+        <div class="macro-box"><div class="macro-val" id="prev-kcal">0</div><div class="macro-label">kcal</div></div>
+        <div class="macro-box"><div class="macro-val" id="prev-prot">0g</div><div class="macro-label" data-fr="Protéines" data-en="Protein">Protéines</div></div>
+        <div class="macro-box"><div class="macro-val" id="prev-carbs">0g</div><div class="macro-label" data-fr="Glucides" data-en="Carbs">Glucides</div></div>
+        <div class="macro-box"><div class="macro-val" id="prev-fat">0g</div><div class="macro-label" data-fr="Lipides" data-en="Fat">Lipides</div></div>
+        <div class="macro-box"><div class="macro-val" id="prev-fiber">0g</div><div class="macro-label" data-fr="Fibres" data-en="Fiber">Fibres</div></div>
+        <div class="macro-box"><div class="macro-val" id="prev-sugar">0g</div><div class="macro-label" data-fr="Sucres" data-en="Sugar">Sucres</div></div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-recipe')" data-fr="Annuler" data-en="Cancel">Annuler</button>
+      <button class="btn btn-primary" onclick="addRecipe()" data-fr="Sauvegarder" data-en="Save">Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Weight -->
+<div class="modal-overlay" id="modal-add-weight">
+  <div class="modal">
+    <div class="modal-title">⚖️ <span data-fr="Ajouter une pesée" data-en="Add weigh-in">Ajouter une pesée</span></div>
+    <div class="form-group"><label>Cliente</label><select id="w-client"></select></div>
+    <div class="form-row">
+      <div class="form-group"><label data-fr="Poids (kg)" data-en="Weight (kg)">Poids (kg)</label><input type="number" id="w-weight" placeholder="68.5" step="0.1"></div>
+      <div class="form-group"><label>Date</label><input type="date" id="w-date"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-weight')" data-fr="Annuler" data-en="Cancel">Annuler</button>
+      <button class="btn btn-primary" onclick="addWeight()" data-fr="Ajouter" data-en="Add">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Quote -->
+<div class="modal-overlay" id="modal-add-quote">
+  <div class="modal">
+    <div class="modal-title">🧠 <span data-fr="Nouvelle citation" data-en="New Quote">Nouvelle citation</span></div>
+    <div class="form-group"><label>Citation</label><textarea id="quote-text" placeholder="Ta citation..."></textarea></div>
+    <div class="form-group"><label data-fr="Auteur" data-en="Author">Auteur</label><input type="text" id="quote-author" placeholder="— Auteur"></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-quote')" data-fr="Annuler" data-en="Cancel">Annuler</button>
+      <button class="btn btn-primary" onclick="addQuote()" data-fr="Ajouter" data-en="Add">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Video -->
+<div class="modal-overlay" id="modal-add-video">
+  <div class="modal">
+    <div class="modal-title">▶️ <span data-fr="Ajouter une vidéo" data-en="Add Video">Ajouter une vidéo</span></div>
+    <div class="form-group"><label data-fr="Titre" data-en="Title">Titre</label><input type="text" id="video-title" placeholder="Exercice épaules"></div>
+    <div class="form-group"><label data-fr="Lien YouTube" data-en="YouTube link">Lien YouTube</label><input type="text" id="video-url" placeholder="https://youtube.com/..."></div>
+    <div class="form-group"><label data-fr="Catégorie" data-en="Category">Catégorie</label>
+      <select id="video-cat">
+        <option>Entraînement</option><option>Nutrition</option><option>Mindset</option><option>Technique</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-video')" data-fr="Annuler" data-en="Cancel">Annuler</button>
+      <button class="btn btn-primary" onclick="addVideo()" data-fr="Ajouter" data-en="Add">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Note -->
+<div class="modal-overlay" id="modal-add-note">
+  <div class="modal">
+    <div class="modal-title">📝 <span data-fr="Nouvelle note" data-en="New Note">Nouvelle note</span></div>
+    <div class="form-group"><label>Cliente</label><select id="note-client"></select></div>
+    <div class="form-group"><label>Note</label><textarea id="note-text" placeholder="Observations, progrès..."></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-note')" data-fr="Annuler" data-en="Cancel">Annuler</button>
+      <button class="btn btn-primary" onclick="addNote()" data-fr="Ajouter" data-en="Add">Ajouter</button>
+    </div>
+  </div>
+</div>
+
 <div class="notif" id="notif"></div>
 
 <script>
-// STATE
+// ============ FOOD DATABASE (per 100g) ============
+const FOODS = [
+  // Proteins
+  {fr:'Poulet (blanc)',en:'Chicken breast',cal:165,prot:31,carbs:0,fat:3.6,fiber:0,sugar:0},
+  {fr:'Dinde (blanc)',en:'Turkey breast',cal:135,prot:30,carbs:0,fat:1,fiber:0,sugar:0},
+  {fr:'Boeuf (haché 5%)',en:'Beef mince 5%',cal:137,prot:21,carbs:0,fat:5,fiber:0,sugar:0},
+  {fr:'Saumon',en:'Salmon',cal:208,prot:20,carbs:0,fat:13,fiber:0,sugar:0},
+  {fr:'Thon (conserve)',en:'Tuna (canned)',cal:116,prot:26,carbs:0,fat:1,fiber:0,sugar:0},
+  {fr:'Oeuf entier',en:'Whole egg',cal:155,prot:13,carbs:1,fat:11,fiber:0,sugar:0.6},
+  {fr:'Blanc d\'oeuf',en:'Egg white',cal:52,prot:11,carbs:0.7,fat:0.2,fiber:0,sugar:0.7},
+  {fr:'Tofu',en:'Tofu',cal:76,prot:8,carbs:2,fat:4,fiber:0.3,sugar:0.5},
+  {fr:'Crevettes',en:'Shrimp',cal:99,prot:24,carbs:0,fat:0.3,fiber:0,sugar:0},
+  {fr:'Cabillaud',en:'Cod',cal:82,prot:18,carbs:0,fat:0.7,fiber:0,sugar:0},
+  // Dairy
+  {fr:'Fromage blanc 0%',en:'Quark 0%',cal:49,prot:8,carbs:3.5,fat:0,fiber:0,sugar:3.5},
+  {fr:'Yaourt grec 0%',en:'Greek yogurt 0%',cal:59,prot:10,carbs:3.6,fat:0.4,fiber:0,sugar:3.6},
+  {fr:'Lait entier',en:'Whole milk',cal:61,prot:3.2,carbs:4.8,fat:3.3,fiber:0,sugar:4.8},
+  {fr:'Lait demi-écrémé',en:'Semi-skimmed milk',cal:46,prot:3.3,carbs:4.8,fat:1.6,fiber:0,sugar:4.8},
+  {fr:'Fromage (emmental)',en:'Emmental cheese',cal:382,prot:29,carbs:0,fat:29,fiber:0,sugar:0},
+  {fr:'Cottage cheese',en:'Cottage cheese',cal:98,prot:11,carbs:3.4,fat:4.3,fiber:0,sugar:2.7},
+  // Carbs
+  {fr:'Riz basmati cuit',en:'Basmati rice cooked',cal:121,prot:2.5,carbs:25,fat:0.4,fiber:0.4,sugar:0},
+  {fr:'Riz complet cuit',en:'Brown rice cooked',cal:111,prot:2.6,carbs:23,fat:0.9,fiber:1.8,sugar:0},
+  {fr:'Pâtes cuites',en:'Pasta cooked',cal:131,prot:5,carbs:25,fat:1.1,fiber:1.8,sugar:0.5},
+  {fr:'Pâtes complètes cuites',en:'Whole wheat pasta cooked',cal:124,prot:5,carbs:23,fat:1,fiber:3.9,sugar:0.5},
+  {fr:'Quinoa cuit',en:'Quinoa cooked',cal:120,prot:4.4,carbs:22,fat:1.9,fiber:2.8,sugar:0.9},
+  {fr:'Avoine (flocons)',en:'Oats',cal:389,prot:17,carbs:66,fat:7,fiber:11,sugar:1},
+  {fr:'Pain complet',en:'Whole wheat bread',cal:247,prot:10,carbs:41,fat:3.4,fiber:6.8,sugar:4.4},
+  {fr:'Pain de mie',en:'White bread',cal:265,prot:8,carbs:49,fat:3.2,fiber:2.7,sugar:5},
+  {fr:'Patate douce cuite',en:'Sweet potato cooked',cal:86,prot:1.6,carbs:20,fat:0.1,fiber:3,sugar:4.2},
+  {fr:'Pomme de terre cuite',en:'Potato cooked',cal:87,prot:1.9,carbs:20,fat:0.1,fiber:1.8,sugar:0.7},
+  {fr:'Lentilles cuites',en:'Lentils cooked',cal:116,prot:9,carbs:20,fat:0.4,fiber:7.9,sugar:1.8},
+  {fr:'Pois chiches cuits',en:'Chickpeas cooked',cal:164,prot:8.9,carbs:27,fat:2.6,fiber:7.6,sugar:4.8},
+  // Vegetables
+  {fr:'Brocoli',en:'Broccoli',cal:34,prot:2.8,carbs:7,fat:0.4,fiber:2.6,sugar:1.7},
+  {fr:'Épinards',en:'Spinach',cal:23,prot:2.9,carbs:3.6,fat:0.4,fiber:2.2,sugar:0.4},
+  {fr:'Tomate',en:'Tomato',cal:18,prot:0.9,carbs:3.9,fat:0.2,fiber:1.2,sugar:2.6},
+  {fr:'Concombre',en:'Cucumber',cal:15,prot:0.7,carbs:3.6,fat:0.1,fiber:0.5,sugar:1.7},
+  {fr:'Courgette',en:'Zucchini',cal:17,prot:1.2,carbs:3.1,fat:0.3,fiber:1,sugar:2.5},
+  {fr:'Poivron rouge',en:'Red pepper',cal:31,prot:1,carbs:6,fat:0.3,fiber:2.1,sugar:4.2},
+  {fr:'Carotte',en:'Carrot',cal:41,prot:0.9,carbs:10,fat:0.2,fiber:2.8,sugar:4.7},
+  {fr:'Haricots verts',en:'Green beans',cal:31,prot:1.8,carbs:7,fat:0.1,fiber:3.4,sugar:3.3},
+  {fr:'Champignons',en:'Mushrooms',cal:22,prot:3.1,carbs:3.3,fat:0.3,fiber:1,sugar:1.7},
+  {fr:'Avocat',en:'Avocado',cal:160,prot:2,carbs:9,fat:15,fiber:6.7,sugar:0.7},
+  {fr:'Salade verte',en:'Lettuce',cal:15,prot:1.4,carbs:2.9,fat:0.2,fiber:1.3,sugar:1.6},
+  // Fruits
+  {fr:'Banane',en:'Banana',cal:89,prot:1.1,carbs:23,fat:0.3,fiber:2.6,sugar:12},
+  {fr:'Pomme',en:'Apple',cal:52,prot:0.3,carbs:14,fat:0.2,fiber:2.4,sugar:10},
+  {fr:'Orange',en:'Orange',cal:47,prot:0.9,carbs:12,fat:0.1,fiber:2.4,sugar:9.4},
+  {fr:'Fraises',en:'Strawberries',cal:32,prot:0.7,carbs:7.7,fat:0.3,fiber:2,sugar:4.9},
+  {fr:'Myrtilles',en:'Blueberries',cal:57,prot:0.7,carbs:14,fat:0.3,fiber:2.4,sugar:10},
+  {fr:'Mangue',en:'Mango',cal:60,prot:0.8,carbs:15,fat:0.4,fiber:1.6,sugar:13.7},
+  {fr:'Ananas',en:'Pineapple',cal:50,prot:0.5,carbs:13,fat:0.1,fiber:1.4,sugar:9.9},
+  // Fats
+  {fr:'Huile d\'olive',en:'Olive oil',cal:884,prot:0,carbs:0,fat:100,fiber:0,sugar:0},
+  {fr:'Beurre de cacahuète',en:'Peanut butter',cal:588,prot:25,carbs:20,fat:50,fiber:6,sugar:9},
+  {fr:'Amandes',en:'Almonds',cal:579,prot:21,carbs:22,fat:50,fiber:12.5,sugar:4.4},
+  {fr:'Noix de cajou',en:'Cashews',cal:553,prot:18,carbs:30,fat:44,fiber:3.3,sugar:5.9},
+  {fr:'Graines de chia',en:'Chia seeds',cal:486,prot:17,carbs:42,fat:31,fiber:34,sugar:0},
+  {fr:'Noix',en:'Walnuts',cal:654,prot:15,carbs:14,fat:65,fiber:6.7,sugar:2.6},
+  // Protein powders
+  {fr:'Whey protéine',en:'Whey protein',cal:400,prot:80,carbs:8,fat:5,fiber:0,sugar:3},
+  {fr:'Protéine végétale',en:'Plant protein',cal:370,prot:75,carbs:10,fat:4,fiber:2,sugar:2},
+];
+
+// ============ STATE ============
 let state = {
-  lang: 'fr',
-  clients: [],
-  programs: [],
-  mealPlans: [],
-  fastingTimer: null,
-  fastingStart: null,
-  fastingDuration: 16 * 3600,
+  lang:'fr', clients:[], programs:[], mealPlans:[], recipes:[],
+  weights:[], quotes:[], videos:[], notes:[],
+  recipeIngredients:[],
+  fastingTimer:null, fastingStart:null, fastingDuration:16*3600,
 };
 
-// LANG
-function setLang(lang) {
-  state.lang = lang;
+// ============ LANG ============
+function setLang(l) {
+  state.lang = l;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
   document.querySelectorAll('[data-fr]').forEach(el => {
-    el.textContent = el.getAttribute(`data-${lang}`);
+    if(el.tagName !== 'OPTION') el.textContent = el.getAttribute(`data-${l}`);
   });
-  updateFastingDisplay();
-  renderAll();
+  updateFastingDisplay(); renderAll();
 }
 
-// PAGES
-function showPage(id) {
+// ============ PAGES ============
+function showPage(id, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById(`page-${id}`).classList.add('active');
-  event.currentTarget.classList.add('active');
-  if (id === 'programs') populateClientSelects();
-  if (id === 'nutrition') populateClientSelects();
-  if (id === 'fasting') updateFastingDisplay();
+  if(el) el.classList.add('active');
+  populateClientSelects();
+  if(id==='fasting') updateFastingDisplay();
   renderAll();
 }
 
-// MODALS
+// ============ MODALS ============
 function openModal(id) {
-  if (id === 'modal-add-program' || id === 'modal-add-meal') populateClientSelects();
-  if (id === 'modal-add-program') { document.getElementById('exercises-container').innerHTML = ''; addExerciseField(); }
-  if (id === 'modal-add-meal') { document.getElementById('meals-container').innerHTML = ''; addMealField(); }
+  populateClientSelects();
+  if(id==='modal-add-program'){document.getElementById('exercises-container').innerHTML='';addExerciseField();}
+  if(id==='modal-add-meal'){document.getElementById('meals-container').innerHTML='';addMealField();}
+  if(id==='modal-add-recipe'){state.recipeIngredients=[];renderRecipeIngredients();}
+  if(id==='modal-add-weight'){document.getElementById('w-date').value=new Date().toISOString().split('T')[0];}
   document.getElementById(id).classList.add('open');
 }
+function closeModal(id){document.getElementById(id).classList.remove('open');}
 
-function closeModal(id) {
-  document.getElementById(id).classList.remove('open');
+// ============ NOTIFY ============
+function notify(msg){
+  const n=document.getElementById('notif');
+  n.textContent=msg; n.classList.add('show');
+  setTimeout(()=>n.classList.remove('show'),2500);
 }
 
-// NOTIFY
-function notify(msg) {
-  const n = document.getElementById('notif');
-  n.textContent = msg;
-  n.classList.add('show');
-  setTimeout(() => n.classList.remove('show'), 2500);
-}
-
-// CLIENTS
-function addClient() {
-  const name = document.getElementById('client-name').value.trim();
-  if (!name) return;
+// ============ CLIENTS ============
+function addClient(){
+  const name=document.getElementById('c-name').value.trim();
+  if(!name) return;
   state.clients.push({
-    id: Date.now(),
-    name,
-    age: document.getElementById('client-age').value,
-    weight: document.getElementById('client-weight').value,
-    goalWeight: document.getElementById('client-goal-weight').value,
-    format: document.getElementById('client-format').value,
-    sessions: document.getElementById('client-sessions').value,
-    notes: document.getElementById('client-notes').value,
+    id:Date.now(), name,
+    age:+document.getElementById('c-age').value,
+    weight:+document.getElementById('c-weight').value,
+    height:+document.getElementById('c-height').value,
+    goalWeight:+document.getElementById('c-goal').value,
+    format:document.getElementById('c-format').value,
+    sessions:document.getElementById('c-sessions').value,
+    notes:document.getElementById('c-notes').value,
   });
-  closeModal('modal-add-client');
-  renderAll();
-  notify(state.lang === 'fr' ? `${name} ajoutée ! 💎` : `${name} added! 💎`);
-  document.getElementById('client-name').value = '';
-  document.getElementById('client-age').value = '';
-  document.getElementById('client-weight').value = '';
-  document.getElementById('client-goal-weight').value = '';
-  document.getElementById('client-notes').value = '';
+  closeModal('modal-add-client'); renderAll();
+  notify(state.lang==='fr'?`${name} ajoutée ! 💎`:`${name} added! 💎`);
+  ['c-name','c-age','c-weight','c-height','c-goal','c-notes'].forEach(id=>document.getElementById(id).value='');
 }
-
-function deleteClient(id) {
-  state.clients = state.clients.filter(c => c.id !== id);
-  renderAll();
+function deleteClient(id){state.clients=state.clients.filter(c=>c.id!==id);renderAll();}
+function fmtFormat(f){
+  return {online:{fr:'En ligne',en:'Online'},salle:{fr:'En salle',en:'In-person'},hybride:{fr:'Hybride',en:'Hybrid'}}[f]?.[state.lang]||f;
 }
-
-function formatLabel(f) {
-  const map = { online: { fr: 'En ligne', en: 'Online' }, salle: { fr: 'En salle', en: 'In-person' }, hybride: { fr: 'Hybride', en: 'Hybrid' } };
-  return map[f]?.[state.lang] || f;
-}
-
-function renderClients() {
-  const list = document.getElementById('clients-list');
-  const dash = document.getElementById('dashboard-clients-list');
-  if (!state.clients.length) {
-    const empty = `<div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang === 'fr' ? 'Aucune cliente ajoutée' : 'No clients added yet'}</div>`;
-    list.innerHTML = empty;
-    dash.innerHTML = empty;
-    return;
+function renderClients(){
+  const list=document.getElementById('clients-list');
+  const dash=document.getElementById('dashboard-clients-list');
+  if(!state.clients.length){
+    const e=`<div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang==='fr'?'Aucune cliente':'No clients'}</div>`;
+    list.innerHTML=e; dash.innerHTML=e; return;
   }
-  const html = state.clients.map(c => `
+  list.innerHTML=state.clients.map(c=>`
     <div class="client-row">
       <div class="avatar">${c.name[0].toUpperCase()}</div>
       <div class="client-info">
         <div class="client-name">${c.name}</div>
-        <div class="client-detail">${c.age ? c.age + ' ans • ' : ''}${formatLabel(c.format)} • ${c.sessions} ${state.lang === 'fr' ? 'séances/sem' : 'sessions/wk'}</div>
+        <div class="client-detail">${c.age?c.age+' ans • ':''}${fmtFormat(c.format)} • ${c.sessions} séances/sem</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
-        ${c.weight && c.goalWeight ? `<span class="badge badge-gold">${c.weight}→${c.goalWeight}kg</span>` : ''}
+        ${c.weight&&c.goalWeight?`<span class="badge badge-gold">${c.weight}→${c.goalWeight}kg</span>`:''}
         <button class="btn btn-danger btn-sm" onclick="deleteClient(${c.id})">✕</button>
       </div>
-    </div>
-  `).join('');
-  list.innerHTML = html;
-  dash.innerHTML = state.clients.slice(0, 3).map(c => `
+    </div>`).join('');
+  dash.innerHTML=state.clients.slice(0,3).map(c=>`
     <div class="client-row">
       <div class="avatar">${c.name[0].toUpperCase()}</div>
-      <div class="client-info">
-        <div class="client-name">${c.name}</div>
-        <div class="client-detail">${formatLabel(c.format)} • ${c.sessions} ${state.lang === 'fr' ? 'séances/sem' : 'sessions/wk'}</div>
+      <div class="client-info"><div class="client-name">${c.name}</div><div class="client-detail">${fmtFormat(c.format)}</div></div>
+    </div>`).join('');
+}
+
+// ============ POPULATE SELECTS ============
+function populateClientSelects(){
+  const ids=['prog-client','meal-client','meta-client','w-client','note-client','weight-client-filter','notes-client-filter'];
+  ids.forEach(id=>{
+    const sel=document.getElementById(id);
+    if(!sel) return;
+    sel.innerHTML=state.clients.length
+      ?state.clients.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')
+      :`<option value="">${state.lang==='fr'?'Aucune cliente':'No clients'}</option>`;
+  });
+}
+
+// ============ METABOLISM ============
+function prefillMeta(){
+  const id=+document.getElementById('meta-client').value;
+  const c=state.clients.find(x=>x.id===id);
+  if(!c) return;
+  if(c.age) document.getElementById('meta-age').value=c.age;
+  if(c.weight) document.getElementById('meta-weight').value=c.weight;
+  if(c.height) document.getElementById('meta-height').value=c.height;
+}
+function calcMeta(){
+  const age=+document.getElementById('meta-age').value;
+  const weight=+document.getElementById('meta-weight').value;
+  const height=+document.getElementById('meta-height').value;
+  const activity=+document.getElementById('meta-activity').value;
+  const goal=document.getElementById('meta-goal').value;
+  const deficit=+document.getElementById('meta-deficit').value||0;
+  if(!age||!weight||!height){notify(state.lang==='fr'?'Remplis tous les champs !':'Fill all fields!');return;}
+  // Mifflin-St Jeor (female)
+  const bmr=Math.round(10*weight+6.25*height-5*age-161);
+  const tdee=Math.round(bmr*activity);
+  const target=tdee+deficit;
+  const protein=Math.round(weight*2); // 2g/kg
+  const fat=Math.round(target*0.25/9);
+  const carbs=Math.round((target-protein*4-fat*9)/4);
+  const fiber=Math.round(target/1000*14);
+  const sugar=Math.round(carbs*0.15);
+  document.getElementById('meta-bmr-val').textContent=bmr;
+  document.getElementById('meta-tdee-val').textContent=tdee;
+  document.getElementById('meta-target-val').textContent=target;
+  document.getElementById('meta-protein-val').textContent=protein+'g';
+  document.getElementById('meta-carbs-val').textContent=carbs+'g';
+  document.getElementById('r-protein').textContent=protein+'g';
+  document.getElementById('r-carbs').textContent=carbs+'g';
+  document.getElementById('r-fat').textContent=fat+'g';
+  document.getElementById('r-fiber').textContent=fiber+'g';
+  const advice={
+    loss:`🎯 ${state.lang==='fr'?`Déficit de ${Math.abs(deficit)} kcal — perte estimée : ${(Math.abs(deficit)/7700).toFixed(2)} kg/semaine`:`${Math.abs(deficit)} kcal deficit — estimated loss: ${(Math.abs(deficit)/7700).toFixed(2)} kg/week`}`,
+    maintain:`✅ ${state.lang==='fr'?'Maintien du poids — consommer environ':'Weight maintenance — consume about'} ${tdee} kcal/jour`,
+    gain:`💪 ${state.lang==='fr'?`Surplus de ${deficit} kcal — prise de masse progressive`:`${deficit} kcal surplus — progressive muscle gain`}`,
+  };
+  document.getElementById('meta-advice').innerHTML=advice[goal];
+  document.getElementById('meta-result').style.display='block';
+  notify(state.lang==='fr'?'Métabolisme calculé ! 🔥':'Metabolism calculated! 🔥');
+}
+
+// ============ FOOD SEARCH ============
+function searchFood(){
+  const q=document.getElementById('food-search').value.toLowerCase();
+  const res=document.getElementById('food-results');
+  if(!q){res.style.display='none';return;}
+  const matches=FOODS.filter(f=>
+    f.fr.toLowerCase().includes(q)||f.en.toLowerCase().includes(q)
+  ).slice(0,8);
+  if(!matches.length){res.style.display='none';return;}
+  res.style.display='block';
+  res.innerHTML=matches.map(f=>`
+    <div class="food-result-item" onclick="selectFood(${FOODS.indexOf(f)})">
+      <div>${state.lang==='fr'?f.fr:f.en}</div>
+      <div class="food-detail">${f.cal} kcal | P:${f.prot}g G:${f.carbs}g L:${f.fat}g (pour 100g)</div>
+    </div>`).join('');
+}
+function selectFood(idx){
+  const f=FOODS[idx];
+  state.recipeIngredients.push({food:f, qty:100});
+  document.getElementById('food-search').value='';
+  document.getElementById('food-results').style.display='none';
+  renderRecipeIngredients();
+}
+function renderRecipeIngredients(){
+  const container=document.getElementById('recipe-ingredients');
+  if(!state.recipeIngredients.length){container.innerHTML='';updateRecipePreview();return;}
+  container.innerHTML=state.recipeIngredients.map((ing,i)=>`
+    <div class="ingredient-row">
+      <div style="flex:1;font-size:14px;font-weight:600">${state.lang==='fr'?ing.food.fr:ing.food.en}</div>
+      <input type="number" value="${ing.qty}" min="1" style="width:80px" onchange="updateIngQty(${i},this.value)">
+      <span style="font-size:12px;color:var(--muted)">g</span>
+      <span style="font-size:12px;color:var(--gold);font-weight:600">${Math.round(ing.food.cal*ing.qty/100)} kcal</span>
+      <button class="btn btn-danger btn-sm" onclick="removeIng(${i})">✕</button>
+    </div>`).join('');
+  updateRecipePreview();
+}
+function updateIngQty(i,val){state.recipeIngredients[i].qty=+val;renderRecipeIngredients();}
+function removeIng(i){state.recipeIngredients.splice(i,1);renderRecipeIngredients();}
+function updateRecipePreview(){
+  const prev=document.getElementById('recipe-macro-preview');
+  if(!state.recipeIngredients.length){prev.style.display='none';return;}
+  prev.style.display='block';
+  const totals=state.recipeIngredients.reduce((acc,ing)=>{
+    const r=ing.qty/100;
+    acc.cal+=ing.food.cal*r; acc.prot+=ing.food.prot*r;
+    acc.carbs+=ing.food.carbs*r; acc.fat+=ing.food.fat*r;
+    acc.fiber+=ing.food.fiber*r; acc.sugar+=ing.food.sugar*r;
+    return acc;
+  },{cal:0,prot:0,carbs:0,fat:0,fiber:0,sugar:0});
+  document.getElementById('prev-kcal').textContent=Math.round(totals.cal);
+  document.getElementById('prev-prot').textContent=Math.round(totals.prot)+'g';
+  document.getElementById('prev-carbs').textContent=Math.round(totals.carbs)+'g';
+  document.getElementById('prev-fat').textContent=Math.round(totals.fat)+'g';
+  document.getElementById('prev-fiber').textContent=Math.round(totals.fiber)+'g';
+  document.getElementById('prev-sugar').textContent=Math.round(totals.sugar)+'g';
+}
+
+// ============ RECIPES ============
+function addRecipe(){
+  const name=document.getElementById('recipe-name').value.trim();
+  if(!name||!state.recipeIngredients.length){notify(state.lang==='fr'?'Nom et ingrédients requis !':'Name and ingredients required!');return;}
+  const servings=+document.getElementById('recipe-servings').value||1;
+  const totals=state.recipeIngredients.reduce((acc,ing)=>{
+    const r=ing.qty/100;
+    acc.cal+=ing.food.cal*r; acc.prot+=ing.food.prot*r;
+    acc.carbs+=ing.food.carbs*r; acc.fat+=ing.food.fat*r;
+    acc.fiber+=ing.food.fiber*r; acc.sugar+=ing.food.sugar*r;
+    return acc;
+  },{cal:0,prot:0,carbs:0,fat:0,fiber:0,sugar:0});
+  state.recipes.push({
+    id:Date.now(), name, servings,
+    cat:document.getElementById('recipe-cat').value,
+    ingredients:[...state.recipeIngredients],
+    instructions:document.getElementById('recipe-instructions').value,
+    totals, perServing:{cal:totals.cal/servings,prot:totals.prot/servings,carbs:totals.carbs/servings,fat:totals.fat/servings,fiber:totals.fiber/servings,sugar:totals.sugar/servings}
+  });
+  closeModal('modal-add-recipe'); renderAll();
+  notify(state.lang==='fr'?'Recette créée ! 👩‍🍳':'Recipe created! 👩‍🍳');
+  document.getElementById('recipe-name').value=''; document.getElementById('recipe-instructions').value='';
+}
+function deleteRecipe(id){state.recipes=state.recipes.filter(r=>r.id!==id);renderAll();}
+function renderRecipes(){
+  const list=document.getElementById('recipes-list');
+  if(!state.recipes.length){list.innerHTML=`<div class="card"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang==='fr'?'Aucune recette':'No recipes'}</div></div>`;return;}
+  list.innerHTML=state.recipes.map(r=>`
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <div>
+          <div class="recipe-title">👩‍🍳 ${r.name}</div>
+          <div style="font-size:12px;color:var(--gold);font-weight:600">${r.cat} • ${r.servings} ${state.lang==='fr'?'portion(s)':'serving(s)'}</div>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="deleteRecipe(${r.id})">✕</button>
       </div>
-    </div>
-  `).join('');
+      <div style="font-weight:600;font-size:13px;color:var(--green);margin-bottom:8px">${state.lang==='fr'?'Par portion :':'Per serving:'}</div>
+      <div class="macro-grid">
+        <div class="macro-box"><div class="macro-val">${Math.round(r.perServing.cal)}</div><div class="macro-label">kcal</div></div>
+        <div class="macro-box"><div class="macro-val">${Math.round(r.perServing.prot)}g</div><div class="macro-label">${state.lang==='fr'?'Protéines':'Protein'}</div></div>
+        <div class="macro-box"><div class="macro-val">${Math.round(r.perServing.carbs)}g</div><div class="macro-label">${state.lang==='fr'?'Glucides':'Carbs'}</div></div>
+        <div class="macro-box"><div class="macro-val">${Math.round(r.perServing.fat)}g</div><div class="macro-label">${state.lang==='fr'?'Lipides':'Fat'}</div></div>
+        <div class="macro-box"><div class="macro-val">${Math.round(r.perServing.fiber)}g</div><div class="macro-label">${state.lang==='fr'?'Fibres':'Fiber'}</div></div>
+        <div class="macro-box"><div class="macro-val">${Math.round(r.perServing.sugar)}g</div><div class="macro-label">${state.lang==='fr'?'Sucres':'Sugar'}</div></div>
+      </div>
+      <div style="margin-top:12px">
+        <div style="font-weight:600;font-size:13px;color:var(--green);margin-bottom:6px">${state.lang==='fr'?'Ingrédients :':'Ingredients:'}</div>
+        ${r.ingredients.map(ing=>`<div style="font-size:13px;padding:3px 0;border-bottom:1px solid var(--border)">${state.lang==='fr'?ing.food.fr:ing.food.en} — <b>${ing.qty}g</b> <span style="color:var(--muted)">(${Math.round(ing.food.cal*ing.qty/100)} kcal)</span></div>`).join('')}
+      </div>
+      ${r.instructions?`<div style="margin-top:12px;background:var(--cream);border-radius:10px;padding:12px;font-size:13px;line-height:1.7">${r.instructions.replace(/\n/g,'<br>')}</div>`:''}
+    </div>`).join('');
 }
 
-// POPULATE SELECTS
-function populateClientSelects() {
-  ['prog-client', 'meal-client'].forEach(id => {
-    const sel = document.getElementById(id);
-    if (!sel) return;
-    sel.innerHTML = state.clients.length
-      ? state.clients.map(c => `<option value="${c.id}">${c.name}</option>`).join('')
-      : `<option value="">${state.lang === 'fr' ? 'Aucune cliente' : 'No clients'}</option>`;
-  });
+// ============ PROGRAMS ============
+function addExerciseField(){
+  const c=document.getElementById('exercises-container');
+  const d=document.createElement('div');
+  d.style.cssText='display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center';
+  d.innerHTML=`<input type="text" placeholder="Exercice" class="ex-name-input"><input type="text" placeholder="Séries" class="ex-sets-input"><input type="text" placeholder="Rép." class="ex-reps-input"><input type="text" placeholder="Repos" class="ex-rest-input"><button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>`;
+  c.appendChild(d);
 }
-
-// EXERCISES
-function addExerciseField() {
-  const container = document.getElementById('exercises-container');
-  const div = document.createElement('div');
-  div.style.cssText = 'display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center';
-  div.innerHTML = `
-    <input type="text" placeholder="${state.lang === 'fr' ? 'Exercice' : 'Exercise'}" class="ex-name-input">
-    <input type="text" placeholder="${state.lang === 'fr' ? 'Séries' : 'Sets'}" class="ex-sets-input">
-    <input type="text" placeholder="${state.lang === 'fr' ? 'Rép.' : 'Reps'}" class="ex-reps-input">
-    <input type="text" placeholder="${state.lang === 'fr' ? 'Repos' : 'Rest'}" class="ex-rest-input">
-    <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>
-  `;
-  container.appendChild(div);
+function addProgram(){
+  const name=document.getElementById('prog-name').value.trim();
+  if(!name) return;
+  const clientId=document.getElementById('prog-client').value;
+  const client=state.clients.find(c=>c.id==clientId);
+  const exercises=[...document.querySelectorAll('#exercises-container > div')].map(d=>({
+    name:d.querySelector('.ex-name-input').value,
+    sets:d.querySelector('.ex-sets-input').value,
+    reps:d.querySelector('.ex-reps-input').value,
+    rest:d.querySelector('.ex-rest-input').value,
+  })).filter(e=>e.name);
+  state.programs.push({id:Date.now(),name,clientId,clientName:client?.name||'—',type:document.getElementById('prog-type').value,exercises});
+  closeModal('modal-add-program'); renderAll();
+  notify(state.lang==='fr'?'Programme créé ! 💪':'Program created! 💪');
+  document.getElementById('prog-name').value='';
 }
-
-// PROGRAMS
-function addProgram() {
-  const name = document.getElementById('prog-name').value.trim();
-  if (!name) return;
-  const clientId = document.getElementById('prog-client').value;
-  const client = state.clients.find(c => c.id == clientId);
-  const exercises = [...document.querySelectorAll('#exercises-container > div')].map(div => ({
-    name: div.querySelector('.ex-name-input').value,
-    sets: div.querySelector('.ex-sets-input').value,
-    reps: div.querySelector('.ex-reps-input').value,
-    rest: div.querySelector('.ex-rest-input').value,
-  })).filter(e => e.name);
-
-  state.programs.push({
-    id: Date.now(),
-    name,
-    clientId,
-    clientName: client?.name || '—',
-    type: document.getElementById('prog-type').value,
-    exercises,
-  });
-  closeModal('modal-add-program');
-  renderAll();
-  notify(state.lang === 'fr' ? 'Programme créé ! 💪' : 'Program created! 💪');
-  document.getElementById('prog-name').value = '';
-}
-
-function deleteProgram(id) {
-  state.programs = state.programs.filter(p => p.id !== id);
-  renderAll();
-}
-
-function renderPrograms() {
-  const list = document.getElementById('programs-list');
-  if (!state.programs.length) {
-    list.innerHTML = `<div class="card"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang === 'fr' ? 'Aucun programme créé' : 'No programs yet'}</div></div>`;
-    return;
-  }
-  list.innerHTML = state.programs.map(p => `
+function deleteProgram(id){state.programs=state.programs.filter(p=>p.id!==id);renderAll();}
+function renderPrograms(){
+  const list=document.getElementById('programs-list');
+  if(!state.programs.length){list.innerHTML=`<div class="card"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang==='fr'?'Aucun programme':'No programs'}</div></div>`;return;}
+  list.innerHTML=state.programs.map(p=>`
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-        <div>
-          <div class="card-title" style="margin-bottom:4px">📋 ${p.name}</div>
-          <div style="font-size:12px;color:var(--muted)">${p.clientName} • ${p.type}</div>
-        </div>
+        <div><div class="card-title" style="margin-bottom:4px">📋 ${p.name}</div><div style="font-size:12px;color:var(--muted)">${p.clientName} • ${p.type}</div></div>
         <button class="btn btn-danger btn-sm" onclick="deleteProgram(${p.id})">✕</button>
       </div>
-      ${p.exercises.map((e, i) => `
-        <div class="exercise-item">
-          <div class="ex-num">${i + 1}</div>
-          <div class="ex-info">
-            <div class="ex-name">${e.name}</div>
-            <div class="ex-detail">${e.sets ? e.sets + ' ' + (state.lang === 'fr' ? 'séries' : 'sets') : ''} ${e.reps ? '× ' + e.reps + ' ' + (state.lang === 'fr' ? 'rép.' : 'reps') : ''} ${e.rest ? '— ' + (state.lang === 'fr' ? 'repos' : 'rest') + ': ' + e.rest : ''}</div>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `).join('');
+      ${p.exercises.map((e,i)=>`<div class="exercise-item"><div class="ex-num">${i+1}</div><div class="ex-info"><div class="ex-name">${e.name}</div><div class="ex-detail">${e.sets?e.sets+' séries':''} ${e.reps?'× '+e.reps+' rép.':''} ${e.rest?'— repos: '+e.rest:''}</div></div></div>`).join('')}
+    </div>`).join('');
 }
 
-// MEALS
-function addMealField() {
-  const container = document.getElementById('meals-container');
-  const div = document.createElement('div');
-  div.style.cssText = 'display:grid;grid-template-columns:1fr 2fr auto;gap:8px;margin-bottom:8px;align-items:center';
-  div.innerHTML = `
-    <input type="time" class="meal-time-input" value="08:00">
-    <input type="text" placeholder="${state.lang === 'fr' ? 'Description du repas' : 'Meal description'}" class="meal-desc-input">
-    <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>
-  `;
-  container.appendChild(div);
+// ============ MEAL PLANS ============
+function addMealField(){
+  const c=document.getElementById('meals-container');
+  const d=document.createElement('div');
+  d.style.cssText='display:grid;grid-template-columns:1fr 2fr auto;gap:8px;margin-bottom:8px;align-items:center';
+  d.innerHTML=`<input type="time" class="meal-time-input" value="08:00"><input type="text" placeholder="Description" class="meal-desc-input"><button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>`;
+  c.appendChild(d);
 }
-
-function addMealPlan() {
-  const name = document.getElementById('meal-plan-name').value.trim();
-  if (!name) return;
-  const clientId = document.getElementById('meal-client').value;
-  const client = state.clients.find(c => c.id == clientId);
-  const meals = [...document.querySelectorAll('#meals-container > div')].map(div => ({
-    time: div.querySelector('.meal-time-input').value,
-    desc: div.querySelector('.meal-desc-input').value,
-  })).filter(m => m.desc).sort((a, b) => a.time.localeCompare(b.time));
-
-  state.mealPlans.push({
-    id: Date.now(),
-    name,
-    clientId,
-    clientName: client?.name || '—',
-    calories: document.getElementById('meal-calories').value,
-    meals,
-  });
-  closeModal('modal-add-meal');
-  renderAll();
-  notify(state.lang === 'fr' ? 'Plan alimentaire créé ! 🥗' : 'Meal plan created! 🥗');
-  document.getElementById('meal-plan-name').value = '';
-  document.getElementById('meal-calories').value = '';
+function addMealPlan(){
+  const name=document.getElementById('meal-plan-name').value.trim();
+  if(!name) return;
+  const clientId=document.getElementById('meal-client').value;
+  const client=state.clients.find(c=>c.id==clientId);
+  const meals=[...document.querySelectorAll('#meals-container > div')].map(d=>({
+    time:d.querySelector('.meal-time-input').value,
+    desc:d.querySelector('.meal-desc-input').value,
+  })).filter(m=>m.desc).sort((a,b)=>a.time.localeCompare(b.time));
+  state.mealPlans.push({id:Date.now(),name,clientId,clientName:client?.name||'—',calories:document.getElementById('meal-calories').value,meals});
+  closeModal('modal-add-meal'); renderAll();
+  notify(state.lang==='fr'?'Plan créé ! 🥗':'Plan created! 🥗');
+  document.getElementById('meal-plan-name').value=''; document.getElementById('meal-calories').value='';
 }
-
-function deleteMealPlan(id) {
-  state.mealPlans = state.mealPlans.filter(m => m.id !== id);
-  renderAll();
-}
-
-function renderMeals() {
-  const list = document.getElementById('meals-list');
-  if (!state.mealPlans.length) {
-    list.innerHTML = `<div class="card"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang === 'fr' ? 'Aucun plan créé' : 'No meal plans yet'}</div></div>`;
-    return;
-  }
-  list.innerHTML = state.mealPlans.map(p => `
+function deleteMealPlan(id){state.mealPlans=state.mealPlans.filter(m=>m.id!==id);renderAll();}
+function renderMeals(){
+  const list=document.getElementById('meals-list');
+  if(!state.mealPlans.length){list.innerHTML=`<div class="card"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang==='fr'?'Aucun plan':'No plans'}</div></div>`;return;}
+  list.innerHTML=state.mealPlans.map(p=>`
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-        <div>
-          <div class="card-title" style="margin-bottom:4px">🥗 ${p.name}</div>
-          <div style="font-size:12px;color:var(--muted)">${p.clientName} ${p.calories ? '• ' + p.calories + ' kcal/jour' : ''}</div>
-        </div>
+        <div><div class="card-title" style="margin-bottom:4px">🥗 ${p.name}</div><div style="font-size:12px;color:var(--muted)">${p.clientName} ${p.calories?'• '+p.calories+' kcal/jour':''}</div></div>
         <button class="btn btn-danger btn-sm" onclick="deleteMealPlan(${p.id})">✕</button>
       </div>
-      ${p.meals.map(m => `
-        <div class="meal-row">
-          <div class="meal-time">${m.time}</div>
-          <div class="meal-content">
-            <div class="meal-name">${m.desc}</div>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `).join('');
+      ${p.meals.map(m=>`<div class="meal-row"><div class="meal-time">${m.time}</div><div class="meal-content"><div class="meal-name">${m.desc}</div></div></div>`).join('')}
+    </div>`).join('');
 }
 
-// STATS
-function renderStats() {
-  document.getElementById('stat-clients').textContent = state.clients.length;
-  document.getElementById('stat-programs').textContent = state.programs.length;
-  document.getElementById('stat-meals').textContent = state.mealPlans.length;
+// ============ WEIGHT ============
+function addWeight(){
+  const clientId=document.getElementById('w-client').value;
+  const client=state.clients.find(c=>c.id==clientId);
+  const weight=+document.getElementById('w-weight').value;
+  const date=document.getElementById('w-date').value;
+  if(!weight||!date) return;
+  state.weights.push({id:Date.now(),clientId,clientName:client?.name||'—',weight,date});
+  state.weights.sort((a,b)=>new Date(b.date)-new Date(a.date));
+  closeModal('modal-add-weight'); renderAll();
+  notify(state.lang==='fr'?'Pesée ajoutée ! ⚖️':'Weigh-in added! ⚖️');
+}
+function renderWeights(){
+  const list=document.getElementById('weights-list');
+  const clientId=document.getElementById('weight-client-filter')?.value;
+  const filtered=state.weights.filter(w=>!clientId||w.clientId==clientId);
+  if(!filtered.length){list.innerHTML=`<div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang==='fr'?'Aucune donnée':'No data'}</div>`;return;}
+  list.innerHTML=filtered.map((w,i)=>{
+    const prev=filtered[i+1];
+    const diff=prev?+(w.weight-prev.weight).toFixed(1):null;
+    return `<div class="weight-row">
+      <div class="weight-date">${w.date}</div>
+      <div class="weight-val">${w.weight} kg</div>
+      ${diff!==null?`<div class="weight-diff ${diff<0?'w-down':'w-up'}">${diff>0?'+':''}${diff} kg</div>`:''}
+      <button class="btn btn-danger btn-sm" style="margin-left:auto" onclick="deleteWeight(${w.id})">✕</button>
+    </div>`;
+  }).join('');
+}
+function deleteWeight(id){state.weights=state.weights.filter(w=>w.id!==id);renderWeights();}
+
+// ============ QUOTES ============
+function addQuote(){
+  const text=document.getElementById('quote-text').value.trim();
+  if(!text) return;
+  state.quotes.unshift({id:Date.now(),text,author:document.getElementById('quote-author').value});
+  closeModal('modal-add-quote'); renderQuotes();
+  notify('Citation ajoutée ! 🧠');
+  document.getElementById('quote-text').value=''; document.getElementById('quote-author').value='';
+}
+function deleteQuote(id){state.quotes=state.quotes.filter(q=>q.id!==id);renderQuotes();}
+function renderQuotes(){
+  const list=document.getElementById('quotes-list');
+  const custom=state.quotes.map(q=>`
+    <div class="quote-card">
+      <div class="quote-text">"${q.text}"</div>
+      <div class="quote-author">${q.author||'—'}</div>
+      <button class="btn btn-danger btn-sm" style="margin-top:12px" onclick="deleteQuote(${q.id})">✕</button>
+    </div>`).join('');
+  const defaults=`
+    <div class="quote-card"><div class="quote-text">"Train your mind. Transform your body."</div><div class="quote-author">— PAMOLI 💎</div></div>
+    <div class="quote-card"><div class="quote-text">"Le succès n'est pas final, l'échec n'est pas fatal. C'est le courage de continuer qui compte."</div><div class="quote-author">— Winston Churchill</div></div>`;
+  list.innerHTML=custom+defaults;
 }
 
-// FASTING
-function updateFastingProtocol() {
-  const val = document.getElementById('fasting-protocol').value;
-  const hours = parseInt(val.split(':')[0]);
-  state.fastingDuration = hours * 3600;
+// ============ VIDEOS ============
+function addVideo(){
+  const title=document.getElementById('video-title').value.trim();
+  const url=document.getElementById('video-url').value.trim();
+  if(!title||!url) return;
+  state.videos.push({id:Date.now(),title,url,cat:document.getElementById('video-cat').value});
+  closeModal('modal-add-video'); renderVideos();
+  notify(state.lang==='fr'?'Vidéo ajoutée ! ▶️':'Video added! ▶️');
+  document.getElementById('video-title').value=''; document.getElementById('video-url').value='';
+}
+function deleteVideo(id){state.videos=state.videos.filter(v=>v.id!==id);renderVideos();}
+function getYTId(url){const m=url.match(/(?:v=|youtu\.be\/)([^&\n?#]+)/);return m?m[1]:null;}
+function renderVideos(){
+  const list=document.getElementById('videos-list');
+  if(!state.videos.length){list.innerHTML=`<div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang==='fr'?'Aucune vidéo':'No videos'}</div>`;return;}
+  list.innerHTML=state.videos.map(v=>{
+    const ytId=getYTId(v.url);
+    const thumb=ytId?`<img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px">`:'▶️';
+    return `<div class="video-item">
+      <div class="video-play" onclick="window.open('${v.url}','_blank')" style="cursor:pointer;width:80px;height:50px">${thumb}</div>
+      <div class="video-info">
+        <div class="video-title">${v.title}</div>
+        <div class="video-cat">${v.cat}</div>
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="deleteVideo(${v.id})">✕</button>
+    </div>`;
+  }).join('');
+}
+
+// ============ NOTES ============
+function addNote(){
+  const text=document.getElementById('note-text').value.trim();
+  if(!text) return;
+  const clientId=document.getElementById('note-client').value;
+  const client=state.clients.find(c=>c.id==clientId);
+  state.notes.unshift({id:Date.now(),clientId,clientName:client?.name||'—',text,date:new Date().toLocaleDateString('fr-FR')});
+  closeModal('modal-add-note'); renderNotes();
+  notify(state.lang==='fr'?'Note ajoutée ! 📝':'Note added! 📝');
+  document.getElementById('note-text').value='';
+}
+function deleteNote(id){state.notes=state.notes.filter(n=>n.id!==id);renderNotes();}
+function renderNotes(){
+  const list=document.getElementById('notes-list');
+  const clientId=document.getElementById('notes-client-filter')?.value;
+  const filtered=state.notes.filter(n=>!clientId||n.clientId==clientId);
+  if(!filtered.length){list.innerHTML=`<div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang==='fr'?'Aucune note':'No notes'}</div>`;return;}
+  list.innerHTML=filtered.map(n=>`
+    <div class="note-item">
+      <div class="note-date">${n.clientName} — ${n.date}</div>
+      <div>${n.text}</div>
+      <button class="btn btn-danger btn-sm" style="margin-top:8px" onclick="deleteNote(${n.id})">✕</button>
+    </div>`).join('');
+}
+
+// ============ FASTING ============
+function updateFastingProtocol(){
+  const val=document.getElementById('fasting-protocol').value;
+  state.fastingDuration=parseInt(val)*3600;
   updateFastingDisplay();
 }
-
-function updateFastingDisplay() {
-  const protocol = document.getElementById('fasting-protocol').value;
-  const fastHours = parseInt(protocol.split(':')[0]);
-  const eatHours = parseInt(protocol.split(':')[1]);
-  const startTime = document.getElementById('fasting-start-time').value;
-  const [sh, sm] = startTime.split(':').map(Number);
-
-  const fastEnd = new Date();
-  fastEnd.setHours(sh + fastHours, sm, 0);
-
-  const eatEnd = new Date(fastEnd);
-  eatEnd.setHours(fastEnd.getHours() + eatHours, fastEnd.getMinutes(), 0);
-
-  const fmt = t => t.toTimeString().slice(0,5);
-
-  const fr = `
-    ⏸️ <b>${state.lang === 'fr' ? 'Début du jeûne' : 'Fast starts'}:</b> ${startTime}<br>
-    ✅ <b>${state.lang === 'fr' ? 'Fin du jeûne (premier repas)' : 'Fast ends (first meal)'}:</b> ${fmt(fastEnd)}<br>
-    🍽️ <b>${state.lang === 'fr' ? 'Fenêtre de repas' : 'Eating window'}:</b> ${fmt(fastEnd)} → ${fmt(eatEnd)}<br>
-    🌙 <b>${state.lang === 'fr' ? 'Début jeûne suivant' : 'Next fast starts'}:</b> ${fmt(eatEnd)}
-  `;
-  document.getElementById('fasting-schedule-display').innerHTML = fr;
-
-  const mealWindowHtml = `
-    <div class="meal-row">
-      <div class="meal-time">${fmt(fastEnd)}</div>
-      <div class="meal-content"><div class="meal-name">${state.lang === 'fr' ? '🍳 Premier repas' : '🍳 First meal'}</div></div>
-    </div>
-    <div class="meal-row">
-      <div class="meal-time">${fmt(new Date(fastEnd.getTime() + eatHours/2*3600000))}</div>
-      <div class="meal-content"><div class="meal-name">${state.lang === 'fr' ? '🥗 Repas du milieu' : '🥗 Mid meal'}</div></div>
-    </div>
-    <div class="meal-row">
-      <div class="meal-time">${fmt(eatEnd)}</div>
-      <div class="meal-content"><div class="meal-name">${state.lang === 'fr' ? '🌙 Dernier repas (fin fenêtre)' : '🌙 Last meal (window closes)'}</div></div>
-    </div>
-  `;
-  document.getElementById('meal-window-display').innerHTML = mealWindowHtml;
+function updateFastingDisplay(){
+  const protocol=document.getElementById('fasting-protocol').value;
+  const fh=parseInt(protocol); const eh=parseInt(protocol.split(':')[1]);
+  const start=document.getElementById('fasting-start-time').value;
+  const [sh,sm]=start.split(':').map(Number);
+  const end=new Date(); end.setHours(sh+fh,sm,0);
+  const eatEnd=new Date(end); eatEnd.setHours(end.getHours()+eh,end.getMinutes(),0);
+  const fmt=t=>t.toTimeString().slice(0,5);
+  document.getElementById('fasting-schedule-display').innerHTML=`
+    ⏸️ <b>${state.lang==='fr'?'Début jeûne':'Fast starts'}:</b> ${start}<br>
+    ✅ <b>${state.lang==='fr'?'Premier repas':'First meal'}:</b> ${fmt(end)}<br>
+    🍽️ <b>${state.lang==='fr'?'Fenêtre repas':'Eating window'}:</b> ${fmt(end)} → ${fmt(eatEnd)}<br>
+    🌙 <b>${state.lang==='fr'?'Jeûne suivant':'Next fast'}:</b> ${fmt(eatEnd)}`;
+}
+function startFasting(){
+  state.fastingStart=Date.now();
+  if(state.fastingTimer) clearInterval(state.fastingTimer);
+  state.fastingTimer=setInterval(updateFastingClock,1000);
+  notify(state.lang==='fr'?'Jeûne démarré ! 💪':'Fast started! 💪');
+}
+function stopFasting(){
+  clearInterval(state.fastingTimer); state.fastingTimer=null; state.fastingStart=null;
+  document.getElementById('fasting-clock').textContent='00:00:00';
+  document.getElementById('fasting-bar').style.width='0%';
+  document.getElementById('fasting-progress-text').textContent='0%';
+}
+function updateFastingClock(){
+  if(!state.fastingStart) return;
+  const elapsed=Math.floor((Date.now()-state.fastingStart)/1000);
+  const h=Math.floor(elapsed/3600).toString().padStart(2,'0');
+  const m=Math.floor((elapsed%3600)/60).toString().padStart(2,'0');
+  const s=(elapsed%60).toString().padStart(2,'0');
+  document.getElementById('fasting-clock').textContent=`${h}:${m}:${s}`;
+  const pct=Math.min(100,Math.round(elapsed/state.fastingDuration*100));
+  document.getElementById('fasting-bar').style.width=pct+'%';
+  document.getElementById('fasting-progress-text').textContent=pct+'%';
 }
 
-function startFasting() {
-  state.fastingStart = Date.now();
-  if (state.fastingTimer) clearInterval(state.fastingTimer);
-  state.fastingTimer = setInterval(updateFastingClock, 1000);
-  notify(state.lang === 'fr' ? 'Jeûne démarré ! 💪' : 'Fast started! 💪');
+// ============ STATS ============
+function renderStats(){
+  document.getElementById('stat-clients').textContent=state.clients.length;
+  document.getElementById('stat-programs').textContent=state.programs.length;
+  document.getElementById('stat-recipes').textContent=state.recipes.length;
 }
 
-function stopFasting() {
-  if (state.fastingTimer) clearInterval(state.fastingTimer);
-  state.fastingTimer = null;
-  state.fastingStart = null;
-  document.getElementById('fasting-clock').textContent = '00:00:00';
-  document.getElementById('fasting-bar').style.width = '0%';
-  document.getElementById('fasting-progress-text').textContent = '0%';
+// ============ RENDER ALL ============
+function renderAll(){
+  renderClients(); renderPrograms(); renderMeals();
+  renderRecipes(); renderWeights(); renderQuotes();
+  renderVideos(); renderNotes(); renderStats();
 }
 
-function updateFastingClock() {
-  if (!state.fastingStart) return;
-  const elapsed = Math.floor((Date.now() - state.fastingStart) / 1000);
-  const h = Math.floor(elapsed / 3600).toString().padStart(2, '0');
-  const m = Math.floor((elapsed % 3600) / 60).toString().padStart(2, '0');
-  const s = (elapsed % 60).toString().padStart(2, '0');
-  document.getElementById('fasting-clock').textContent = `${h}:${m}:${s}`;
-  const pct = Math.min(100, Math.round(elapsed / state.fastingDuration * 100));
-  document.getElementById('fasting-bar').style.width = pct + '%';
-  document.getElementById('fasting-progress-text').textContent = pct + '%';
-}
-
-// RENDER ALL
-function renderAll() {
-  renderClients();
-  renderPrograms();
-  renderMeals();
-  renderStats();
-}
-
-// CLOSE ON OVERLAY CLICK
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) overlay.classList.remove('open');
-  });
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});
 });
 
-// INIT
-updateFastingDisplay();
-renderAll();
+// Close food search on outside click
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.food-search-wrap')) document.getElementById('food-results').style.display='none';
+});
+
+// Init
+updateFastingDisplay(); renderAll();
 </script>
 </body>
 </html>
