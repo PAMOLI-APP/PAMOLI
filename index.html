@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAMOLI Coaching</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1B4332;
+    --green-mid: #2D6A4F;
+    --green-light: #40916C;
+    --gold: #B8860B;
+    --gold-light: #D4A017;
+    --cream: #FAF7F2;
+    --dark: #0D1F17;
+    --text: #2C2C2C;
+    --muted: #6B7280;
+    --border: #E5E0D8;
+    --white: #FFFFFF;
+    --danger: #C0392B;
+    --success: #27AE60;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--dark);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+
+  .logo span { color: var(--gold); }
+
+  .lang-toggle {
+    display: flex;
+    gap: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 4px;
+  }
+
+  .lang-btn {
+    padding: 4px 12px;
+    border: none;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .lang-btn.active {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  /* SIDEBAR */
+  .layout {
+    display: flex;
+    min-height: calc(100vh - 64px);
+  }
+
+  sidebar {
+    width: 220px;
+    background: var(--dark);
+    padding: 24px 0;
+    flex-shrink: 0;
+    position: sticky;
+    top: 64px;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    cursor: pointer;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+
+  .nav-item:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+  .nav-item.active { color: var(--gold); border-left-color: var(--gold); background: rgba(184,134,11,0.1); }
+  .nav-item .icon { font-size: 18px; width: 24px; text-align: center; }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    padding: 32px;
+    max-width: 960px;
+  }
+
+  /* PAGE TITLE */
+  .page-header {
+    margin-bottom: 32px;
+  }
+
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--green);
+    margin-bottom: 4px;
+  }
+
+  .page-sub {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--green);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* BUTTONS */
+  .btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: var(--white);
+  }
+
+  .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--white);
+  }
+
+  .btn-gold:hover { background: var(--gold-light); }
+
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--green);
+    color: var(--green);
+  }
+
+  .btn-outline:hover { background: var(--green); color: var(--white); }
+
+  .btn-sm { padding: 6px 14px; font-size: 12px; }
+  .btn-danger { background: var(--danger); color: white; }
+
+  /* FORM */
+  .form-group { margin-bottom: 16px; }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--green);
+    background: var(--white);
+  }
+
+  textarea { resize: vertical; min-height: 80px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .badge-green { background: #D1FAE5; color: var(--green); }
+  .badge-gold { background: #FEF3C7; color: var(--gold); }
+  .badge-red { background: #FEE2E2; color: var(--danger); }
+
+  /* CLIENT LIST */
+  .client-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+
+  .client-row:last-child { border-bottom: none; }
+  .client-row:hover { background: var(--cream); margin: 0 -24px; padding: 14px 24px; border-radius: 10px; }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--green);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .client-info { flex: 1; }
+  .client-name { font-weight: 600; font-size: 14px; }
+  .client-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* EXERCISE */
+  .exercise-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exercise-item:last-child { border-bottom: none; }
+
+  .ex-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--green);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .ex-info { flex: 1; }
+  .ex-name { font-weight: 600; font-size: 14px; }
+  .ex-detail { font-size: 12px; color: var(--muted); }
+
+  /* FASTING CLOCK */
+  .fasting-card {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--green) 100%);
+    border-radius: 20px;
+    padding: 28px;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .fasting-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .fasting-clock {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin: 16px 0;
+  }
+
+  .fasting-bar-bg {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    height: 8px;
+    margin: 12px 0;
+    overflow: hidden;
+  }
+
+  .fasting-bar {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 10px;
+    transition: width 0.5s;
+  }
+
+  .fasting-times {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 8px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--border);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 20px;
+    width: fit-content;
+  }
+
+  .tab {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--muted);
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .tab.active { background: var(--white); color: var(--green); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+  /* MEAL PLAN */
+  .meal-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .meal-row:last-child { border-bottom: none; }
+
+  .meal-time {
+    width: 70px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .meal-content { flex: 1; }
+  .meal-name { font-weight: 600; font-size: 14px; }
+  .meal-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* PAGE VISIBILITY */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--green);
+    margin-bottom: 20px;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  /* DIAMOND DECORATION */
+  .diamond-accent {
+    color: var(--gold);
+    margin-right: 6px;
+  }
+
+  /* NOTIFICATION */
+  .notif {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--green);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 300;
+  }
+
+  .notif.show { transform: translateY(0); opacity: 1; }
+
+  @media (max-width: 768px) {
+    sidebar { width: 60px; }
+    .nav-item span { display: none; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    main { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">PAMOLI</div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<div class="layout">
+  <sidebar>
+    <div class="nav-item active" onclick="showPage('dashboard')">
+      <span class="icon">🏠</span>
+      <span data-fr="Accueil" data-en="Home">Accueil</span>
+    </div>
+    <div class="nav-item" onclick="showPage('clients')">
+      <span class="icon">👩🏾</span>
+      <span data-fr="Clientes" data-en="Clients">Clientes</span>
+    </div>
+    <div class="nav-item" onclick="showPage('programs')">
+      <span class="icon">📋</span>
+      <span data-fr="Programmes" data-en="Programs">Programmes</span>
+    </div>
+    <div class="nav-item" onclick="showPage('nutrition')">
+      <span class="icon">🥗</span>
+      <span data-fr="Nutrition" data-en="Nutrition">Nutrition</span>
+    </div>
+    <div class="nav-item" onclick="showPage('fasting')">
+      <span class="icon">⏱️</span>
+      <span data-fr="Jeûne" data-en="Fasting">Jeûne</span>
+    </div>
+  </sidebar>
+
+  <main>
+
+    <!-- DASHBOARD -->
+    <div id="page-dashboard" class="page active">
+      <div class="page-header">
+        <div class="page-title">💎 <span data-fr="Bonjour, Mirtha" data-en="Hello, Mirtha">Bonjour, Mirtha</span></div>
+        <div class="page-sub" data-fr="Pa Moli — Never Give Up 🇬🇫" data-en="Pa Moli — Never Give Up 🇬🇫">Pa Moli — Never Give Up 🇬🇫</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-clients">0</div>
+          <div class="stat-label" data-fr="Clientes actives" data-en="Active clients">Clientes actives</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-programs">0</div>
+          <div class="stat-label" data-fr="Programmes créés" data-en="Programs created">Programmes créés</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-meals">0</div>
+          <div class="stat-label" data-fr="Plans alimentaires" data-en="Meal plans">Plans alimentaires</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">👩🏾 <span data-fr="Clientes récentes" data-en="Recent clients">Clientes récentes</span></div>
+        <div id="dashboard-clients-list">
+          <div style="color:var(--muted);font-size:14px;text-align:center;padding:20px" data-fr="Aucune cliente pour le moment" data-en="No clients yet">Aucune cliente pour le moment</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div id="page-clients" class="page">
+      <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div class="page-title" data-fr="Mes Clientes" data-en="My Clients">Mes Clientes</div>
+          <div class="page-sub" data-fr="Gérez vos clientes et leur suivi" data-en="Manage your clients and their progress">Gérez vos clientes et leur suivi</div>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('modal-add-client')" data-fr="+ Ajouter" data-en="+ Add">+ Ajouter</button>
+      </div>
+
+      <div class="card">
+        <div id="clients-list">
+          <div style="color:var(--muted);font-size:14px;text-align:center;padding:20px" data-fr="Aucune cliente ajoutée" data-en="No clients added yet">Aucune cliente ajoutée</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAMS -->
+    <div id="page-programs" class="page">
+      <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div class="page-title" data-fr="Programmes" data-en="Programs">Programmes</div>
+          <div class="page-sub" data-fr="Créez et gérez les programmes d'entraînement" data-en="Create and manage training programs">Créez et gérez les programmes d'entraînement</div>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('modal-add-program')" data-fr="+ Créer" data-en="+ Create">+ Créer</button>
+      </div>
+
+      <div id="programs-list"></div>
+    </div>
+
+    <!-- NUTRITION -->
+    <div id="page-nutrition" class="page">
+      <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div class="page-title" data-fr="Plans Alimentaires" data-en="Meal Plans">Plans Alimentaires</div>
+          <div class="page-sub" data-fr="Créez des plans nutritionnels personnalisés" data-en="Create personalized nutrition plans">Créez des plans nutritionnels personnalisés</div>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('modal-add-meal')" data-fr="+ Créer" data-en="+ Create">+ Créer</button>
+      </div>
+
+      <div id="meals-list"></div>
+    </div>
+
+    <!-- FASTING -->
+    <div id="page-fasting" class="page">
+      <div class="page-header">
+        <div class="page-title" data-fr="Jeûne Intermittent" data-en="Intermittent Fasting">Jeûne Intermittent</div>
+        <div class="page-sub" data-fr="Configurez les horaires de jeûne par cliente" data-en="Set fasting schedules per client">Configurez les horaires de jeûne par cliente</div>
+      </div>
+
+      <div class="fasting-card">
+        <div class="fasting-title" data-fr="Minuterie de jeûne" data-en="Fasting Timer">Minuterie de jeûne</div>
+        <div class="fasting-clock" id="fasting-clock">00:00:00</div>
+        <div class="fasting-bar-bg">
+          <div class="fasting-bar" id="fasting-bar" style="width:0%"></div>
+        </div>
+        <div class="fasting-times">
+          <span data-fr="Début jeûne" data-en="Fast start">Début jeûne</span>
+          <span id="fasting-progress-text">0%</span>
+          <span data-fr="Fin jeûne" data-en="Fast end">Fin jeûne</span>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-gold" onclick="startFasting()" id="btn-start-fast" data-fr="Démarrer" data-en="Start">Démarrer</button>
+          <button class="btn btn-outline" style="color:white;border-color:white" onclick="stopFasting()" data-fr="Arrêter" data-en="Stop">Arrêter</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">⚙️ <span data-fr="Configuration du jeûne" data-en="Fasting Configuration">Configuration du jeûne</span></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-fr="Protocole" data-en="Protocol">Protocole</label>
+            <select id="fasting-protocol" onchange="updateFastingProtocol()">
+              <option value="16:8">16:8 (16h jeûne / 8h repas)</option>
+              <option value="18:6">18:6 (18h jeûne / 6h repas)</option>
+              <option value="20:4">20:4 (20h jeûne / 4h repas)</option>
+              <option value="14:10">14:10 (14h jeûne / 10h repas)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-fr="Heure de début du jeûne" data-en="Fast start time">Heure de début du jeûne</label>
+            <input type="time" id="fasting-start-time" value="20:00" onchange="updateFastingDisplay()">
+          </div>
+        </div>
+        <div id="fasting-schedule-display" style="background:var(--cream);border-radius:12px;padding:16px;font-size:14px;line-height:2"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📋 <span data-fr="Plages de repas" data-en="Meal Windows">Plages de repas</span></div>
+        <div id="meal-window-display"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL: Add Client -->
+<div class="modal-overlay" id="modal-add-client">
+  <div class="modal">
+    <div class="modal-title">👩🏾 <span data-fr="Nouvelle cliente" data-en="New Client">Nouvelle cliente</span></div>
+    <div class="form-row">
+      <div class="form-group">
+        <label data-fr="Prénom" data-en="First name">Prénom</label>
+        <input type="text" id="client-name" placeholder="Ex: Sarah">
+      </div>
+      <div class="form-group">
+        <label data-fr="Âge" data-en="Age">Âge</label>
+        <input type="number" id="client-age" placeholder="28">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label data-fr="Poids actuel (kg)" data-en="Current weight (kg)">Poids actuel (kg)</label>
+        <input type="number" id="client-weight" placeholder="70">
+      </div>
+      <div class="form-group">
+        <label data-fr="Objectif (kg)" data-en="Goal (kg)">Objectif (kg)</label>
+        <input type="number" id="client-goal-weight" placeholder="60">
+      </div>
+    </div>
+    <div class="form-group">
+      <label data-fr="Format coaching" data-en="Coaching format">Format coaching</label>
+      <select id="client-format">
+        <option value="online" data-fr="En ligne" data-en="Online">En ligne</option>
+        <option value="salle" data-fr="En salle" data-en="In-person">En salle</option>
+        <option value="hybride" data-fr="Hybride" data-en="Hybrid">Hybride</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label data-fr="Séances par semaine" data-en="Sessions per week">Séances par semaine</label>
+      <select id="client-sessions">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label data-fr="Notes" data-en="Notes">Notes</label>
+      <textarea id="client-notes" placeholder="Allergies, blessures, objectifs..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-client')" data-fr="Annuler" data-en="Cancel">Annuler</button>
+      <button class="btn btn-primary" onclick="addClient()" data-fr="Ajouter" data-en="Add">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Add Program -->
+<div class="modal-overlay" id="modal-add-program">
+  <div class="modal">
+    <div class="modal-title">📋 <span data-fr="Nouveau programme" data-en="New Program">Nouveau programme</span></div>
+    <div class="form-group">
+      <label data-fr="Nom du programme" data-en="Program name">Nom du programme</label>
+      <input type="text" id="prog-name" placeholder="Ex: Semaine 1 - Full Body">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label data-fr="Cliente" data-en="Client">Cliente</label>
+        <select id="prog-client"></select>
+      </div>
+      <div class="form-group">
+        <label data-fr="Type" data-en="Type">Type</label>
+        <select id="prog-type">
+          <option data-fr="Full Body" data-en="Full Body">Full Body</option>
+          <option data-fr="Haut du corps" data-en="Upper Body">Haut du corps</option>
+          <option data-fr="Bas du corps" data-en="Lower Body">Bas du corps</option>
+          <option data-fr="Cardio" data-en="Cardio">Cardio</option>
+        </select>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="card-title" style="margin-bottom:12px">💪 <span data-fr="Exercices" data-en="Exercises">Exercices</span></div>
+    <div id="exercises-container"></div>
+    <button class="btn btn-outline btn-sm" onclick="addExerciseField()" style="margin-top:8px" data-fr="+ Ajouter exercice" data-en="+ Add exercise">+ Ajouter exercice</button>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-program')" data-fr="Annuler" data-en="Cancel">Annuler</button>
+      <button class="btn btn-primary" onclick="addProgram()" data-fr="Sauvegarder" data-en="Save">Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Add Meal Plan -->
+<div class="modal-overlay" id="modal-add-meal">
+  <div class="modal">
+    <div class="modal-title">🥗 <span data-fr="Nouveau plan alimentaire" data-en="New Meal Plan">Nouveau plan alimentaire</span></div>
+    <div class="form-group">
+      <label data-fr="Nom du plan" data-en="Plan name">Nom du plan</label>
+      <input type="text" id="meal-plan-name" placeholder="Ex: Plan semaine 1">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label data-fr="Cliente" data-en="Client">Cliente</label>
+        <select id="meal-client"></select>
+      </div>
+      <div class="form-group">
+        <label data-fr="Calories/jour" data-en="Calories/day">Calories/jour</label>
+        <input type="number" id="meal-calories" placeholder="1800">
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="card-title" style="margin-bottom:12px">🍽️ <span data-fr="Repas" data-en="Meals">Repas</span></div>
+    <div id="meals-container"></div>
+    <button class="btn btn-outline btn-sm" onclick="addMealField()" style="margin-top:8px" data-fr="+ Ajouter repas" data-en="+ Add meal">+ Ajouter repas</button>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-add-meal')" data-fr="Annuler" data-en="Cancel">Annuler</button>
+      <button class="btn btn-primary" onclick="addMealPlan()" data-fr="Sauvegarder" data-en="Save">Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif"></div>
+
+<script>
+// STATE
+let state = {
+  lang: 'fr',
+  clients: [],
+  programs: [],
+  mealPlans: [],
+  fastingTimer: null,
+  fastingStart: null,
+  fastingDuration: 16 * 3600,
+};
+
+// LANG
+function setLang(lang) {
+  state.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    el.textContent = el.getAttribute(`data-${lang}`);
+  });
+  updateFastingDisplay();
+  renderAll();
+}
+
+// PAGES
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(`page-${id}`).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (id === 'programs') populateClientSelects();
+  if (id === 'nutrition') populateClientSelects();
+  if (id === 'fasting') updateFastingDisplay();
+  renderAll();
+}
+
+// MODALS
+function openModal(id) {
+  if (id === 'modal-add-program' || id === 'modal-add-meal') populateClientSelects();
+  if (id === 'modal-add-program') { document.getElementById('exercises-container').innerHTML = ''; addExerciseField(); }
+  if (id === 'modal-add-meal') { document.getElementById('meals-container').innerHTML = ''; addMealField(); }
+  document.getElementById(id).classList.add('open');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+// NOTIFY
+function notify(msg) {
+  const n = document.getElementById('notif');
+  n.textContent = msg;
+  n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), 2500);
+}
+
+// CLIENTS
+function addClient() {
+  const name = document.getElementById('client-name').value.trim();
+  if (!name) return;
+  state.clients.push({
+    id: Date.now(),
+    name,
+    age: document.getElementById('client-age').value,
+    weight: document.getElementById('client-weight').value,
+    goalWeight: document.getElementById('client-goal-weight').value,
+    format: document.getElementById('client-format').value,
+    sessions: document.getElementById('client-sessions').value,
+    notes: document.getElementById('client-notes').value,
+  });
+  closeModal('modal-add-client');
+  renderAll();
+  notify(state.lang === 'fr' ? `${name} ajoutée ! 💎` : `${name} added! 💎`);
+  document.getElementById('client-name').value = '';
+  document.getElementById('client-age').value = '';
+  document.getElementById('client-weight').value = '';
+  document.getElementById('client-goal-weight').value = '';
+  document.getElementById('client-notes').value = '';
+}
+
+function deleteClient(id) {
+  state.clients = state.clients.filter(c => c.id !== id);
+  renderAll();
+}
+
+function formatLabel(f) {
+  const map = { online: { fr: 'En ligne', en: 'Online' }, salle: { fr: 'En salle', en: 'In-person' }, hybride: { fr: 'Hybride', en: 'Hybrid' } };
+  return map[f]?.[state.lang] || f;
+}
+
+function renderClients() {
+  const list = document.getElementById('clients-list');
+  const dash = document.getElementById('dashboard-clients-list');
+  if (!state.clients.length) {
+    const empty = `<div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang === 'fr' ? 'Aucune cliente ajoutée' : 'No clients added yet'}</div>`;
+    list.innerHTML = empty;
+    dash.innerHTML = empty;
+    return;
+  }
+  const html = state.clients.map(c => `
+    <div class="client-row">
+      <div class="avatar">${c.name[0].toUpperCase()}</div>
+      <div class="client-info">
+        <div class="client-name">${c.name}</div>
+        <div class="client-detail">${c.age ? c.age + ' ans • ' : ''}${formatLabel(c.format)} • ${c.sessions} ${state.lang === 'fr' ? 'séances/sem' : 'sessions/wk'}</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        ${c.weight && c.goalWeight ? `<span class="badge badge-gold">${c.weight}→${c.goalWeight}kg</span>` : ''}
+        <button class="btn btn-danger btn-sm" onclick="deleteClient(${c.id})">✕</button>
+      </div>
+    </div>
+  `).join('');
+  list.innerHTML = html;
+  dash.innerHTML = state.clients.slice(0, 3).map(c => `
+    <div class="client-row">
+      <div class="avatar">${c.name[0].toUpperCase()}</div>
+      <div class="client-info">
+        <div class="client-name">${c.name}</div>
+        <div class="client-detail">${formatLabel(c.format)} • ${c.sessions} ${state.lang === 'fr' ? 'séances/sem' : 'sessions/wk'}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// POPULATE SELECTS
+function populateClientSelects() {
+  ['prog-client', 'meal-client'].forEach(id => {
+    const sel = document.getElementById(id);
+    if (!sel) return;
+    sel.innerHTML = state.clients.length
+      ? state.clients.map(c => `<option value="${c.id}">${c.name}</option>`).join('')
+      : `<option value="">${state.lang === 'fr' ? 'Aucune cliente' : 'No clients'}</option>`;
+  });
+}
+
+// EXERCISES
+function addExerciseField() {
+  const container = document.getElementById('exercises-container');
+  const div = document.createElement('div');
+  div.style.cssText = 'display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center';
+  div.innerHTML = `
+    <input type="text" placeholder="${state.lang === 'fr' ? 'Exercice' : 'Exercise'}" class="ex-name-input">
+    <input type="text" placeholder="${state.lang === 'fr' ? 'Séries' : 'Sets'}" class="ex-sets-input">
+    <input type="text" placeholder="${state.lang === 'fr' ? 'Rép.' : 'Reps'}" class="ex-reps-input">
+    <input type="text" placeholder="${state.lang === 'fr' ? 'Repos' : 'Rest'}" class="ex-rest-input">
+    <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>
+  `;
+  container.appendChild(div);
+}
+
+// PROGRAMS
+function addProgram() {
+  const name = document.getElementById('prog-name').value.trim();
+  if (!name) return;
+  const clientId = document.getElementById('prog-client').value;
+  const client = state.clients.find(c => c.id == clientId);
+  const exercises = [...document.querySelectorAll('#exercises-container > div')].map(div => ({
+    name: div.querySelector('.ex-name-input').value,
+    sets: div.querySelector('.ex-sets-input').value,
+    reps: div.querySelector('.ex-reps-input').value,
+    rest: div.querySelector('.ex-rest-input').value,
+  })).filter(e => e.name);
+
+  state.programs.push({
+    id: Date.now(),
+    name,
+    clientId,
+    clientName: client?.name || '—',
+    type: document.getElementById('prog-type').value,
+    exercises,
+  });
+  closeModal('modal-add-program');
+  renderAll();
+  notify(state.lang === 'fr' ? 'Programme créé ! 💪' : 'Program created! 💪');
+  document.getElementById('prog-name').value = '';
+}
+
+function deleteProgram(id) {
+  state.programs = state.programs.filter(p => p.id !== id);
+  renderAll();
+}
+
+function renderPrograms() {
+  const list = document.getElementById('programs-list');
+  if (!state.programs.length) {
+    list.innerHTML = `<div class="card"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang === 'fr' ? 'Aucun programme créé' : 'No programs yet'}</div></div>`;
+    return;
+  }
+  list.innerHTML = state.programs.map(p => `
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div>
+          <div class="card-title" style="margin-bottom:4px">📋 ${p.name}</div>
+          <div style="font-size:12px;color:var(--muted)">${p.clientName} • ${p.type}</div>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="deleteProgram(${p.id})">✕</button>
+      </div>
+      ${p.exercises.map((e, i) => `
+        <div class="exercise-item">
+          <div class="ex-num">${i + 1}</div>
+          <div class="ex-info">
+            <div class="ex-name">${e.name}</div>
+            <div class="ex-detail">${e.sets ? e.sets + ' ' + (state.lang === 'fr' ? 'séries' : 'sets') : ''} ${e.reps ? '× ' + e.reps + ' ' + (state.lang === 'fr' ? 'rép.' : 'reps') : ''} ${e.rest ? '— ' + (state.lang === 'fr' ? 'repos' : 'rest') + ': ' + e.rest : ''}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+// MEALS
+function addMealField() {
+  const container = document.getElementById('meals-container');
+  const div = document.createElement('div');
+  div.style.cssText = 'display:grid;grid-template-columns:1fr 2fr auto;gap:8px;margin-bottom:8px;align-items:center';
+  div.innerHTML = `
+    <input type="time" class="meal-time-input" value="08:00">
+    <input type="text" placeholder="${state.lang === 'fr' ? 'Description du repas' : 'Meal description'}" class="meal-desc-input">
+    <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>
+  `;
+  container.appendChild(div);
+}
+
+function addMealPlan() {
+  const name = document.getElementById('meal-plan-name').value.trim();
+  if (!name) return;
+  const clientId = document.getElementById('meal-client').value;
+  const client = state.clients.find(c => c.id == clientId);
+  const meals = [...document.querySelectorAll('#meals-container > div')].map(div => ({
+    time: div.querySelector('.meal-time-input').value,
+    desc: div.querySelector('.meal-desc-input').value,
+  })).filter(m => m.desc).sort((a, b) => a.time.localeCompare(b.time));
+
+  state.mealPlans.push({
+    id: Date.now(),
+    name,
+    clientId,
+    clientName: client?.name || '—',
+    calories: document.getElementById('meal-calories').value,
+    meals,
+  });
+  closeModal('modal-add-meal');
+  renderAll();
+  notify(state.lang === 'fr' ? 'Plan alimentaire créé ! 🥗' : 'Meal plan created! 🥗');
+  document.getElementById('meal-plan-name').value = '';
+  document.getElementById('meal-calories').value = '';
+}
+
+function deleteMealPlan(id) {
+  state.mealPlans = state.mealPlans.filter(m => m.id !== id);
+  renderAll();
+}
+
+function renderMeals() {
+  const list = document.getElementById('meals-list');
+  if (!state.mealPlans.length) {
+    list.innerHTML = `<div class="card"><div style="color:var(--muted);font-size:14px;text-align:center;padding:20px">${state.lang === 'fr' ? 'Aucun plan créé' : 'No meal plans yet'}</div></div>`;
+    return;
+  }
+  list.innerHTML = state.mealPlans.map(p => `
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div>
+          <div class="card-title" style="margin-bottom:4px">🥗 ${p.name}</div>
+          <div style="font-size:12px;color:var(--muted)">${p.clientName} ${p.calories ? '• ' + p.calories + ' kcal/jour' : ''}</div>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="deleteMealPlan(${p.id})">✕</button>
+      </div>
+      ${p.meals.map(m => `
+        <div class="meal-row">
+          <div class="meal-time">${m.time}</div>
+          <div class="meal-content">
+            <div class="meal-name">${m.desc}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+// STATS
+function renderStats() {
+  document.getElementById('stat-clients').textContent = state.clients.length;
+  document.getElementById('stat-programs').textContent = state.programs.length;
+  document.getElementById('stat-meals').textContent = state.mealPlans.length;
+}
+
+// FASTING
+function updateFastingProtocol() {
+  const val = document.getElementById('fasting-protocol').value;
+  const hours = parseInt(val.split(':')[0]);
+  state.fastingDuration = hours * 3600;
+  updateFastingDisplay();
+}
+
+function updateFastingDisplay() {
+  const protocol = document.getElementById('fasting-protocol').value;
+  const fastHours = parseInt(protocol.split(':')[0]);
+  const eatHours = parseInt(protocol.split(':')[1]);
+  const startTime = document.getElementById('fasting-start-time').value;
+  const [sh, sm] = startTime.split(':').map(Number);
+
+  const fastEnd = new Date();
+  fastEnd.setHours(sh + fastHours, sm, 0);
+
+  const eatEnd = new Date(fastEnd);
+  eatEnd.setHours(fastEnd.getHours() + eatHours, fastEnd.getMinutes(), 0);
+
+  const fmt = t => t.toTimeString().slice(0,5);
+
+  const fr = `
+    ⏸️ <b>${state.lang === 'fr' ? 'Début du jeûne' : 'Fast starts'}:</b> ${startTime}<br>
+    ✅ <b>${state.lang === 'fr' ? 'Fin du jeûne (premier repas)' : 'Fast ends (first meal)'}:</b> ${fmt(fastEnd)}<br>
+    🍽️ <b>${state.lang === 'fr' ? 'Fenêtre de repas' : 'Eating window'}:</b> ${fmt(fastEnd)} → ${fmt(eatEnd)}<br>
+    🌙 <b>${state.lang === 'fr' ? 'Début jeûne suivant' : 'Next fast starts'}:</b> ${fmt(eatEnd)}
+  `;
+  document.getElementById('fasting-schedule-display').innerHTML = fr;
+
+  const mealWindowHtml = `
+    <div class="meal-row">
+      <div class="meal-time">${fmt(fastEnd)}</div>
+      <div class="meal-content"><div class="meal-name">${state.lang === 'fr' ? '🍳 Premier repas' : '🍳 First meal'}</div></div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-time">${fmt(new Date(fastEnd.getTime() + eatHours/2*3600000))}</div>
+      <div class="meal-content"><div class="meal-name">${state.lang === 'fr' ? '🥗 Repas du milieu' : '🥗 Mid meal'}</div></div>
+    </div>
+    <div class="meal-row">
+      <div class="meal-time">${fmt(eatEnd)}</div>
+      <div class="meal-content"><div class="meal-name">${state.lang === 'fr' ? '🌙 Dernier repas (fin fenêtre)' : '🌙 Last meal (window closes)'}</div></div>
+    </div>
+  `;
+  document.getElementById('meal-window-display').innerHTML = mealWindowHtml;
+}
+
+function startFasting() {
+  state.fastingStart = Date.now();
+  if (state.fastingTimer) clearInterval(state.fastingTimer);
+  state.fastingTimer = setInterval(updateFastingClock, 1000);
+  notify(state.lang === 'fr' ? 'Jeûne démarré ! 💪' : 'Fast started! 💪');
+}
+
+function stopFasting() {
+  if (state.fastingTimer) clearInterval(state.fastingTimer);
+  state.fastingTimer = null;
+  state.fastingStart = null;
+  document.getElementById('fasting-clock').textContent = '00:00:00';
+  document.getElementById('fasting-bar').style.width = '0%';
+  document.getElementById('fasting-progress-text').textContent = '0%';
+}
+
+function updateFastingClock() {
+  if (!state.fastingStart) return;
+  const elapsed = Math.floor((Date.now() - state.fastingStart) / 1000);
+  const h = Math.floor(elapsed / 3600).toString().padStart(2, '0');
+  const m = Math.floor((elapsed % 3600) / 60).toString().padStart(2, '0');
+  const s = (elapsed % 60).toString().padStart(2, '0');
+  document.getElementById('fasting-clock').textContent = `${h}:${m}:${s}`;
+  const pct = Math.min(100, Math.round(elapsed / state.fastingDuration * 100));
+  document.getElementById('fasting-bar').style.width = pct + '%';
+  document.getElementById('fasting-progress-text').textContent = pct + '%';
+}
+
+// RENDER ALL
+function renderAll() {
+  renderClients();
+  renderPrograms();
+  renderMeals();
+  renderStats();
+}
+
+// CLOSE ON OVERLAY CLICK
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+});
+
+// INIT
+updateFastingDisplay();
+renderAll();
+</script>
+</body>
+</html>
